@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Новая вкладка</title>
+  <link rel="preconnect" href="https://fonts.cdnfonts.com"/>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/google-sans"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+  <style>
+    /* ════ PALETTE ENGINE ════ */
+    :root {
+      /* generated from accent — defaults purple dark */
+      --p0:#000000;--p10:#21005D;--p20:#381E72;--p30:#4F378B;
+      --p40:#6750A4;--p50:#7965AF;--p60:#9A82DB;--p70:#B69DF8;
+      --p80:#D0BCFF;--p90:#EADDFF;--p95:#F6EDFF;--p99:#FFFBFE;
+
+      --s0:#000000;--s10:#1D192B;--s20:#332D41;--s30:#4A4458;
+      --s40:#625B71;--s50:#7A7289;--s60:#958DA5;--s70:#B0A7C0;
+      --s80:#CCC2DC;--s90:#E8DEF8;--s95:#F6EDFF;
+
+      --t0:#000000;--t10:#31111D;--t20:#492532;--t30:#633B48;
+      --t40:#7D5260;--t50:#986977;--t60:#B58392;--t70:#D29DAC;
+      --t80:#EFB8C8;--t90:#FFD8E4;--t95:#FFECF1;
+
+      --n0:#000000;--n10:#1C1B1F;--n20:#313033;--n30:#484649;
+      --n40:#605D62;--n50:#787579;--n60:#939094;--n70:#AEAAAE;
+      --n80:#C9C5CA;--n90:#E6E1E5;--n95:#F4EFF4;--n99:#FFFBFE;
+
+      --nv10:#1D1A22;--nv20:#332F3C;--nv30:#4A4458;--nv40:#625B71;
+      --nv50:#7A7289;--nv60:#958DA5;--nv70:#B0A7C0;--nv80:#CCC2DC;--nv90:#E8DEF8;
+
+      /* ── SEMANTIC – DARK (default) ── */
+      --md-primary:        var(--p80);
+      --md-on-primary:     var(--p20);
+      --md-prim-cont:      var(--p30);
+      --md-on-prim-cont:   var(--p90);
+
+      --md-secondary:      var(--s80);
+      --md-on-secondary:   var(--s20);
+      --md-sec-cont:       var(--s30);
+      --md-on-sec-cont:    var(--s90);
+
+      --md-tertiary:       var(--t80);
+      --md-on-tertiary:    var(--t20);
+      --md-ter-cont:       var(--t30);
+      --md-on-ter-cont:    var(--t90);
+
+      --md-bg:             #0F0D13;
+      --md-on-bg:          var(--n90);
+      --md-surface:        #141218;
+      --md-on-surface:     var(--n90);
+      --md-surf-var:       var(--nv30);
+      --md-on-surf-var:    var(--nv80);
+
+      --md-surf-lowest:    #0F0D13;
+      --md-surf-low:       #1D1B20;
+      --md-surf-cont:      #211F26;
+      --md-surf-high:      #2B2930;
+      --md-surf-highest:   #36343B;
+
+      --md-outline:        var(--nv50);
+      --md-outline-var:    var(--nv30);
+
+      --md-inv-surf:       var(--n90);
+      --md-inv-on-surf:    var(--n30);
+      --md-inv-primary:    var(--p40);
+
+      --md-error:          #F2B8B5;
+      --md-error-cont:     #8C1D18;
+
+      --el1:0 1px 2px rgba(0,0,0,.55),0 1px 3px 1px rgba(0,0,0,.35);
+      --el2:0 1px 2px rgba(0,0,0,.55),0 2px 6px 2px rgba(0,0,0,.35);
+      --el3:0 4px 12px 3px rgba(0,0,0,.35),0 1px 4px rgba(0,0,0,.55);
+
+      --r-xs:4px;--r-s:8px;--r-m:12px;
+      --r-l:16px;--r-xl:28px;--r-f:9999px;
+
+      --blur-bg: rgba(15,13,19,.88);
+      --search-h: 56px;
+    }
+
+    [data-theme="light"] {
+      --md-primary:        var(--p40);
+      --md-on-primary:     var(--p99);
+      --md-prim-cont:      var(--p90);
+      --md-on-prim-cont:   var(--p10);
+
+      --md-secondary:      var(--s40);
+      --md-on-secondary:   var(--s99,#fff);
+      --md-sec-cont:       var(--s90);
+      --md-on-sec-cont:    var(--s10);
+
+      --md-tertiary:       var(--t40);
+      --md-on-tertiary:    var(--t99,#fff);
+      --md-ter-cont:       var(--t90);
+      --md-on-ter-cont:    var(--t10);
+
+      --md-bg:             var(--n99);
+      --md-on-bg:          var(--n10);
+      --md-surface:        var(--n99);
+      --md-on-surface:     var(--n10);
+      --md-surf-var:       var(--nv90);
+      --md-on-surf-var:    var(--nv30);
+
+      --md-surf-lowest:    #FFFFFF;
+      --md-surf-low:       #F7F2FA;
+      --md-surf-cont:      #F3EDF7;
+      --md-surf-high:      #ECE6F0;
+      --md-surf-highest:   #E6E0E9;
+
+      --md-outline:        var(--nv40);
+      --md-outline-var:    var(--nv80);
+
+      --md-inv-surf:       var(--n20);
+      --md-inv-on-surf:    var(--n95);
+      --md-inv-primary:    var(--p80);
+
+      --md-error:          #B3261E;
+      --md-error-cont:     #F9DEDC;
+
+      --el1:0 1px 2px rgba(0,0,0,.18),0 1px 3px 1px rgba(0,0,0,.1);
+      --el2:0 1px 2px rgba(0,0,0,.18),0 2px 6px 2px rgba(0,0,0,.1);
+      --el3:0 4px 12px 3px rgba(0,0,0,.1),0 1px 4px rgba(0,0,0,.18);
+
+      --blur-bg: rgba(255,251,254,.9);
+    }
+
+    /* ════ RESET ════ */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:'Product Sans','Google Sans',system-ui,sans-serif;background:var(--md-bg);color:var(--md-on-bg);transition:background .4s,color .4s;overflow-x:hidden}
+    .ms{font-family:'Material Symbols Outlined';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;user-select:none;vertical-align:middle;line-height:1;font-style:normal}
+    .ms.f{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+
+    /* ════ BLOBS ════ */
+    .blobs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;transition:opacity .5s}
+    .blob{position:absolute;border-radius:50%;filter:blur(100px);animation:bfloat 22s ease-in-out infinite alternate}
+    .blob1{width:700px;height:700px;top:-200px;left:-200px;animation-duration:24s;opacity:.22}
+    .blob2{width:550px;height:550px;bottom:-180px;right:-120px;animation-duration:18s;animation-delay:-7s;opacity:.18}
+    .blob3{width:420px;height:420px;top:38%;left:42%;animation-duration:30s;animation-delay:-14s;opacity:.15}
+    @keyframes bfloat{0%{transform:translate(0,0)scale(1)}50%{transform:translate(35px,-28px)scale(1.05)}100%{transform:translate(-18px,22px)scale(.96)}}
+
+    /* ════ PAGE ════ */
+    .page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+
+    /* ════ HERO ════ */
+    .hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;transition:margin .4s}
+    .hero-greeting{font-size:14px;color:var(--md-on-surf-var);letter-spacing:.05em;transition:opacity .3s,max-height .3s}
+    .hero-time{font-weight:300;color:var(--md-on-surface);line-height:1;letter-spacing:-.03em;transition:font-size .3s}
+    .hero-date{color:var(--md-on-surf-var);margin-top:3px;transition:opacity .3s,max-height .3s}
+    .gone{opacity:0;max-height:0;overflow:hidden;pointer-events:none}
+
+    /* ════ SEARCH ════ */
+    .search-wrap{width:100%;max-width:640px;position:relative}
+ .search-bar{
+  width:100%;height:var(--search-h);
+  border-radius:var(--r-f);
+  background:var(--md-surf-cont);
+  border:1.5px solid transparent;
+  outline:none;
+  padding:0 44px 0 24px;
+  font-family:inherit;font-size:16px;
+  color:var(--md-on-surface);
+  caret-color:var(--md-primary);
+  box-shadow:var(--el1);
+  transition:box-shadow .25s,background .25s,border-color .25s,text-align .2s;
+  text-align:center;
+}
+.search-bar::placeholder{
+  color:var(--md-on-surf-var);
+  text-align:center;
+  opacity:1;
+  transition:opacity .15s;
+}
+.search-bar:focus{
+  box-shadow:var(--el2);
+  background:var(--md-surf-high);
+  border-color:var(--md-primary);
+  text-align:center;
+}
+.search-bar:focus::placeholder{
+  text-align:center;
+}
+    .s-icon{display:none}
+    .s-clear{
+      position:absolute;right:6px;top:50%;transform:translateY(-50%);
+      width:38px;height:38px;border-radius:var(--r-f);border:none;
+      background:transparent;color:var(--md-on-surf-var);
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity .2s,background .2s;
+    }
+    .s-clear.vis{opacity:1;pointer-events:auto}
+    .s-clear:hover{background:color-mix(in srgb,var(--md-on-surface) 10%,transparent)}
+
+    /* engines */
+    .engines{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+    .eng-chip{font-family:inherit;font-size:12px;font-weight:500;border-radius:var(--r-f);padding:5px 14px;border:1px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s;color:var(--md-on-surf-var);background:transparent}
+    .eng-chip.active{background:var(--md-sec-cont);color:var(--md-on-sec-cont);border-color:transparent}
+    .eng-chip:not(.active):hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent)}
+
+    /* ════ QUICK SITES ════ */
+    .quick-section{width:100%;max-width:700px}
+    .sec-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--md-on-surf-var);margin-bottom:12px;padding:0 4px;display:flex;align-items:center;gap:8px}
+    .quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;transition:grid-template-columns .3s}
+    .quick-grid.list-mode{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+
+    .quick-item{
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      padding:14px 8px;border-radius:var(--r-l);cursor:pointer;
+      transition:background .2s,transform .18s;
+      background:transparent;border:none;font-family:inherit;
+      color:inherit;position:relative;overflow:hidden;
+    }
+    .quick-item:hover{background:color-mix(in srgb,var(--md-on-surface) 9%,transparent);transform:translateY(-2px)}
+    .quick-item:active{transform:translateY(0)}
+    .quick-item.list-item{flex-direction:row;padding:10px 14px;gap:12px;justify-content:flex-start;border-radius:var(--r-m)}
+
+    .q-favicon{
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;transition:box-shadow .2s;
+      font-weight:700;letter-spacing:-.02em;
+    }
+    .quick-item:hover .q-favicon{box-shadow:var(--el2)}
+    .q-label{font-size:12px;font-weight:500;color:var(--md-on-surface);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:82px}
+    .quick-item.list-item .q-label{max-width:none;text-align:left;font-size:13px}
+
+    .q-add .q-favicon{background:transparent!important;color:var(--md-on-surf-var)!important;border:2px dashed var(--md-outline-var)!important;box-shadow:none!important}
+    .q-add .q-label{color:var(--md-on-surf-var)}
+
+    /* ════ WEATHER ════ */
+    .weather-wrap{width:100%;max-width:700px}
+    .weather-card{
+      background:linear-gradient(135deg,var(--md-prim-cont) 0%,var(--md-ter-cont) 100%);
+      border-radius:var(--r-xl);
+      padding:0;overflow:hidden;
+      box-shadow:none;
+    }
+    .w-main-row{display:flex;align-items:flex-start;gap:0;padding:24px 24px 16px}
+    .w-left{flex:1;display:flex;flex-direction:column;gap:6px}
+    .w-icon-big{font-size:62px;line-height:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+    .w-temp-row{display:flex;align-items:flex-end;gap:6px}
+    .w-temp{font-size:52px;font-weight:300;color:var(--md-on-prim-cont);line-height:1}
+    .w-feels{font-size:14px;color:var(--md-on-prim-cont);opacity:.75;margin-bottom:6px}
+    .w-desc{font-size:15px;font-weight:500;color:var(--md-on-prim-cont)}
+    .w-city-name{font-size:12px;color:var(--md-on-prim-cont);opacity:.7;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+    .w-right{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+    .w-badge{background:rgba(0,0,0,.2);border-radius:var(--r-f);padding:4px 12px;font-size:11px;color:var(--md-on-prim-cont);backdrop-filter:blur(8px)}
+    .w-stats{display:flex;gap:0;background:rgba(0,0,0,.18)}
+    .w-stat{flex:1;padding:12px 16px;display:flex;flex-direction:column;gap:3px;border-right:1px solid rgba(255,255,255,.08)}
+    .w-stat:last-child{border-right:none}
+    .w-stat-lbl{font-size:10px;color:var(--md-on-prim-cont);opacity:.65;text-transform:uppercase;letter-spacing:.07em}
+    .w-stat-val{font-size:16px;font-weight:500;color:var(--md-on-prim-cont)}
+    .w-days-row{display:flex;background:rgba(0,0,0,.15)}
+    .w-day{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-right:1px solid rgba(255,255,255,.06);transition:background .15s;cursor:default}
+    .w-day:last-child{border-right:none}
+    .w-day:hover{background:rgba(255,255,255,.06)}
+    .w-day-name{font-size:10px;color:var(--md-on-prim-cont);opacity:.65;text-transform:uppercase;letter-spacing:.06em}
+    .w-day-icon{font-size:20px}
+    .w-day-max{font-size:13px;font-weight:600;color:var(--md-on-prim-cont)}
+    .w-day-min{font-size:11px;color:var(--md-on-prim-cont);opacity:.6}
+    .w-loading{display:flex;align-items:center;justify-content:center;height:100px;gap:10px;color:var(--md-on-prim-cont);font-size:14px;opacity:.7}
+
+    /* ════ SETTINGS FAB ════ */
+.s-fab{
+  position:fixed;bottom:12px;right:12px;z-index:200;
+  width:52px;height:52px;border-radius:var(--r-l);
+  background:transparent;color:transparent;
+  border:none;
+  box-shadow:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .25s,box-shadow .25s,transform .2s,color .25s;
+  overflow:hidden;font-size:24px;
+}
+    .s-fab:hover,.s-fab:focus-visible,.s-fab-area:hover .s-fab{
+      background:var(--md-surf-cont);
+      color:var(--md-on-surf-var);
+      box-shadow:var(--el2);
+      transform:scale(1.05);
+    }
+    /* invisible hover zone around FAB */
+.s-fab-area{
+  position:fixed;bottom:0;right:0;z-index:199;
+  width:76px;height:76px;
+  pointer-events:auto;
+}
+
+    /* ════ SETTINGS PANEL ════ */
+    .s-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;justify-content:flex-end}
+    .s-overlay.show{opacity:1;pointer-events:auto}
+    .s-panel{
+      width:380px;max-width:100%;height:100%;
+      background:var(--md-surf-cont);
+      box-shadow:var(--el3);
+      overflow-y:auto;overflow-x:hidden;
+      transform:translateX(100%);
+      transition:transform .35s cubic-bezier(.2,0,0,1);
+      display:flex;flex-direction:column;
+    }
+    .s-overlay.show .s-panel{transform:translateX(0)}
+    .s-panel::-webkit-scrollbar{width:4px}
+    .s-panel::-webkit-scrollbar-thumb{background:var(--md-outline-var);border-radius:2px}
+    .s-head{display:flex;align-items:center;gap:8px;padding:14px 8px 14px 16px;position:sticky;top:0;z-index:10;background:var(--md-surf-cont);border-bottom:1px solid var(--md-outline-var)}
+    .s-head-title{flex:1;font-size:18px;font-weight:500;color:var(--md-on-surface)}
+    .s-body{padding:4px 0 40px;display:flex;flex-direction:column}
+    .s-sec{padding:18px 20px 4px}
+    .s-sec-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--md-primary)}
+    .s-div{height:1px;background:var(--md-outline-var);margin:4px 16px}
+    .s-row{display:flex;align-items:center;gap:12px;padding:11px 20px;border:none;background:transparent;width:100%;font-family:inherit;cursor:pointer;transition:background .15s;text-align:left;color:var(--md-on-surface);position:relative;overflow:hidden}
+    .s-row:hover{background:color-mix(in srgb,var(--md-on-surface) 7%,transparent)}
+    .s-ico{color:var(--md-on-surf-var);font-size:20px;flex-shrink:0}
+    .s-rc{flex:1;min-width:0}
+    .s-rl{font-size:14px;font-weight:500;color:var(--md-on-surface)}
+    .s-rs{font-size:12px;color:var(--md-on-surf-var);margin-top:1px}
+
+    /* Switch */
+    .sw{width:50px;height:30px;border-radius:var(--r-f);background:var(--md-surf-var);border:2px solid var(--md-outline);position:relative;cursor:pointer;transition:background .25s,border-color .25s;flex-shrink:0}
+    .sw.on{background:var(--md-primary);border-color:var(--md-primary)}
+    .sw-th{width:14px;height:14px;border-radius:50%;background:var(--md-outline);position:absolute;top:50%;left:4px;transform:translateY(-50%);transition:left .25s,width .15s,height .15s,background .25s}
+    .sw.on .sw-th{left:24px;width:22px;height:22px;background:var(--md-on-primary);transform:translateY(-50%) translateX(-4px)}
+
+    /* Segmented */
+    .seg{display:flex;border:1px solid var(--md-outline-var);border-radius:var(--r-f);overflow:hidden;flex-shrink:0}
+    .seg-btn{flex:1;font-family:inherit;font-size:12px;font-weight:500;border:none;border-right:1px solid var(--md-outline-var);background:transparent;color:var(--md-on-surf-var);padding:6px 10px;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
+    .seg-btn:last-child{border-right:none}
+    .seg-btn.on{background:var(--md-sec-cont);color:var(--md-on-sec-cont)}
+
+    /* Select */
+    .s-sel{font-family:inherit;font-size:13px;background:var(--md-surf-high);color:var(--md-on-surface);border:1px solid var(--md-outline-var);border-radius:var(--r-s);padding:7px 10px;cursor:pointer;outline:none;transition:border-color .2s}
+    .s-sel:focus{border-color:var(--md-primary)}
+
+    /* Accent dots */
+    .accent-row{display:flex;gap:10px;flex-wrap:wrap;padding:4px 20px 10px}
+    .ac-dot{width:32px;height:32px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:border .2s,transform .2s;position:relative}
+    .ac-dot:hover{transform:scale(1.12)}
+    .ac-dot.sel::after{content:'';position:absolute;inset:5px;border-radius:50%;background:rgba(255,255,255,.6)}
+
+    /* Slider */
+    .s-slider-wrap{padding:4px 20px 10px}
+    .s-slider{width:100%;-webkit-appearance:none;height:4px;border-radius:var(--r-f);background:var(--md-surf-high);outline:none;cursor:pointer}
+    .s-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--md-primary);box-shadow:var(--el1);border:2px solid var(--md-on-primary)}
+
+    /* ════ MODAL ════ */
+    .modal-ov{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+    .modal-ov.show{opacity:1;pointer-events:auto}
+    .modal{background:var(--md-surf-cont);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:22px 20px 44px;width:100%;max-width:540px;transform:translateY(100%);transition:transform .35s cubic-bezier(.2,0,0,1);display:flex;flex-direction:column;gap:14px}
+    .modal-ov.show .modal{transform:translateY(0)}
+    .modal-handle{width:32px;height:4px;border-radius:var(--r-f);background:var(--md-outline-var);margin:0 auto -4px}
+    .modal-title{font-size:20px;font-weight:500;color:var(--md-on-surface)}
+
+    /* TF */
+    .tf{position:relative;background:var(--md-surf-highest);border-radius:var(--r-xs) var(--r-xs) 0 0}
+    .tf::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--md-outline);transition:height .2s,background .2s}
+    .tf:focus-within::after{height:2px;background:var(--md-primary)}
+    .tf-lbl{position:absolute;top:50%;left:16px;transform:translateY(-50%);font-size:16px;color:var(--md-on-surf-var);pointer-events:none;transition:.2s}
+    .tf-inp{font-family:inherit;font-size:16px;width:100%;background:transparent;border:none;outline:none;color:var(--md-on-surface);padding:24px 16px 8px;caret-color:var(--md-primary)}
+    .tf:focus-within .tf-lbl,.tf.v .tf-lbl{top:8px;transform:none;font-size:12px;color:var(--md-primary)}
+
+    /* emoji */
+    .em-grid{display:flex;flex-wrap:wrap;gap:6px}
+    .em-btn{width:36px;height:36px;border-radius:var(--r-s);border:2px solid transparent;background:var(--md-surf-high);font-size:18px;cursor:pointer;transition:border .15s,transform .15s;position:relative;overflow:hidden}
+    .em-btn:hover{transform:scale(1.08)}
+    .em-btn.sel{border-color:var(--md-primary)}
+
+    /* Buttons */
+    .btn{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:.025em;border:none;cursor:pointer;border-radius:var(--r-f);padding:10px 20px;display:inline-flex;align-items:center;gap:8px;transition:box-shadow .2s;position:relative;overflow:hidden}
+    .btn-filled{background:var(--md-primary);color:var(--md-on-primary)}
+    .btn-filled:hover{box-shadow:var(--el1)}
+    .btn-tonal{background:var(--md-sec-cont);color:var(--md-on-sec-cont)}
+    .btn-tonal:hover{box-shadow:var(--el1)}
+    .btn-text{background:transparent;color:var(--md-primary)}
+    .btn-text:hover{background:color-mix(in srgb,var(--md-primary) 8%,transparent)}
+
+    /* Icon btn */
+    .ib{width:40px;height:40px;border-radius:var(--r-f);border:none;background:transparent;color:var(--md-on-surf-var);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;position:relative;overflow:hidden}
+    .ib:hover{background:color-mix(in srgb,var(--md-on-surface) 9%,transparent)}
+
+    /* CTX */
+    .ctx{position:fixed;z-index:500;background:var(--md-surf-high);border-radius:var(--r-m);box-shadow:var(--el3);overflow:hidden;display:none;flex-direction:column;min-width:164px;border:1px solid var(--md-outline-var)}
+    .ctx.show{display:flex}
+    .ctx-item{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:14px;color:var(--md-on-surface);cursor:pointer;transition:background .15s;border:none;background:transparent;font-family:inherit;width:100%;text-align:left}
+    .ctx-item:hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent)}
+    .ctx-item .ms{font-size:18px;color:var(--md-on-surf-var)}
+    .ctx-item.danger{color:var(--md-error)}
+    .ctx-item.danger .ms{color:var(--md-error)}
+
+    /* Snack */
+    .snack{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--md-inv-surf);color:var(--md-inv-on-surf);border-radius:var(--r-s);padding:13px 16px;display:flex;align-items:center;gap:14px;min-width:220px;max-width:500px;box-shadow:var(--el3);font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:600}
+    .snack.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+    .snack-action{font-family:inherit;border:none;background:transparent;color:var(--md-inv-primary);font-size:14px;font-weight:500;cursor:pointer}
+
+    /* Ripple */
+    .rpl{position:relative;overflow:hidden}
+    .rp{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);background:currentColor;opacity:.16;animation:rpa .55s linear}
+    @keyframes rpa{to{transform:scale(4);opacity:0}}
+
+    /* Spacer */
+    .spacer{flex:1}
+
+    /* Separator label in modal */
+    .small-label{font-size:12px;color:var(--md-on-surf-var);font-weight:500}
+    .m-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
+
+    /* ════ MISC ════ */
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:var(--md-outline-var);border-radius:3px}
+
+    @media(max-width:540px){
+      .quick-grid{grid-template-columns:repeat(4,1fr)}
+      .s-panel{width:100%}
+    }
+
+    /* Page spacing helper */
+    .gap-sm{height:32px}
+    .gap-md{height:44px}
+  </style>
+</head>
+<body>
+
+<div class="blobs" id="blobs">
+  <div class="blob blob1" id="blob1"></div>
+  <div class="blob blob2" id="blob2"></div>
+  <div class="blob blob3" id="blob3"></div>
+</div>
+
+<main class="page">
+  <!-- HERO -->
+  <div class="gap-md" id="hero-gap-top"></div>
+  <div class="hero" id="hero">
+    <div class="hero-greeting" id="greeting">Добрый день</div>
+    <div class="hero-time" id="clock" style="font-size:clamp(56px,13vw,96px)">00:00</div>
+    <div class="hero-date" id="datestr" style="font-size:15px">Понедельник, 1 января</div>
+  </div>
+  <div class="gap-md" id="hero-gap-bot"></div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap" id="search-section">
+    <input class="search-bar" id="s-in" type="text"
+      placeholder="Поиск…" autocomplete="off" spellcheck="false"
+      oninput="onSearchInput(this.value)"
+      onkeydown="onKey(event)"/>
+  </div>
+  <div class="engines" id="engines-row"></div>
+  <div class="gap-md"></div>
+
+  <!-- QUICK SITES -->
+  <div class="quick-section" id="sites-section">
+    <div class="sec-label" id="ql-label">
+      <span class="ms f" style="font-size:16px;color:var(--md-primary)">bookmarks</span>
+      Сохранённые сайты
+    </div>
+    <div class="quick-grid" id="quick-grid"></div>
+  </div>
+
+  <div class="gap-md"></div>
+
+  <!-- WEATHER -->
+  <div class="weather-wrap" id="weather-section">
+    <div class="sec-label" style="margin-bottom:10px">
+      <span class="ms f" style="font-size:16px;color:var(--md-primary)">wb_sunny</span>
+      Погода
+      <button class="ib rpl" style="width:28px;height:28px;margin-left:auto" onclick="fetchWeather()" title="Обновить">
+        <span class="ms" style="font-size:16px">refresh</span>
+      </button>
+    </div>
+    <div class="weather-card" id="weather-card">
+      <div class="w-loading"><span class="ms">cloud_off</span> Настройте город в настройках</div>
+    </div>
+  </div>
+</main>
+
+<!-- SETTINGS FAB AREA -->
+<div class="s-fab-area">
+  <button class="s-fab rpl" onclick="openSettings()" title="Настройки">
+    <span class="ms">settings</span>
+  </button>
+</div>
+
+<!-- ════ SETTINGS PANEL ════ -->
+<div class="s-overlay" id="s-overlay" onclick="ov(event)">
+<div class="s-panel">
+  <div class="s-head">
+    <button class="ib rpl" onclick="closeSettings()"><span class="ms">arrow_back</span></button>
+    <div class="s-head-title">Настройки</div>
+  </div>
+  <div class="s-body">
+
+    <!-- ВНЕШНИЙ ВИД -->
+    <div class="s-sec"><div class="s-sec-title">Внешний вид</div></div>
+    <div class="s-div"></div>
+
+    <div class="s-row">
+      <span class="ms s-ico">dark_mode</span>
+      <div class="s-rc"><div class="s-rl">Тёмная тема</div></div>
+      <div class="sw rpl" id="sw-dark" onclick="tog('dark')"><div class="sw-th"></div></div>
+    </div>
+
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">palette</span>
+      <div class="s-rc"><div class="s-rl">Акцентный цвет</div><div class="s-rs">Основной цвет интерфейса</div></div>
+    </div>
+    <div class="accent-row" id="accent-row"></div>
+
+    <div class="s-row">
+      <span class="ms s-ico">blur_on</span>
+      <div class="s-rc"><div class="s-rl">Фоновые блобы</div><div class="s-rs">Анимированные блики</div></div>
+      <div class="sw rpl" id="sw-blobs" onclick="tog('blobs')"><div class="sw-th"></div></div>
+    </div>
+
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">texture</span>
+      <div class="s-rc"><div class="s-rl">Прозрачность блобов</div></div>
+    </div>
+    <div class="s-slider-wrap">
+      <input type="range" class="s-slider" id="sl-blob" min="5" max="40" step="1"
+        oninput="S.blobOpacity=+this.value;saveS();applyBlobs()"/>
+    </div>
+
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">text_fields</span>
+      <div class="s-rc"><div class="s-rl">Размер шрифта часов</div></div>
+      <div class="seg">
+        <button class="seg-btn" id="fs-s" onclick="setFontSize('s')">S</button>
+        <button class="seg-btn on" id="fs-m" onclick="setFontSize('m')">M</button>
+        <button class="seg-btn" id="fs-l" onclick="setFontSize('l')">L</button>
+      </div>
+    </div>
+
+    <!-- ЧАСЫ -->
+    <div class="s-sec" style="margin-top:10px"><div class="s-sec-title">Часы и дата</div></div>
+    <div class="s-div"></div>
+
+    <div class="s-row">
+      <span class="ms s-ico">access_time</span>
+      <div class="s-rc"><div class="s-rl">Показывать часы</div></div>
+      <div class="sw rpl" id="sw-clock" onclick="tog('clock')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row">
+      <span class="ms s-ico">waving_hand</span>
+      <div class="s-rc"><div class="s-rl">Приветствие</div><div class="s-rs">«Доброе утро» и т.д.</div></div>
+      <div class="sw rpl" id="sw-greet" onclick="tog('greet')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row">
+      <span class="ms s-ico">calendar_today</span>
+      <div class="s-rc"><div class="s-rl">Дата</div><div class="s-rs">День недели и число</div></div>
+      <div class="sw rpl" id="sw-date" onclick="tog('date')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">schedule</span>
+      <div class="s-rc"><div class="s-rl">Формат времени</div></div>
+      <div class="seg">
+        <button class="seg-btn" id="fmt-24" onclick="setFmt('24')">24ч</button>
+        <button class="seg-btn" id="fmt-12" onclick="setFmt('12')">12ч</button>
+      </div>
+    </div>
+
+    <!-- ПОИСК -->
+    <div class="s-sec" style="margin-top:10px"><div class="s-sec-title">Поиск</div></div>
+    <div class="s-div"></div>
+
+    <div class="s-row">
+      <span class="ms s-ico">search</span>
+      <div class="s-rc"><div class="s-rl">Показывать поиск</div></div>
+      <div class="sw rpl" id="sw-search" onclick="tog('search')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">language</span>
+      <div class="s-rc"><div class="s-rl">Поисковая система</div></div>
+      <select class="s-sel" id="eng-sel" onchange="setEng(this.value)">
+        <option value="google">Google</option>
+        <option value="yandex">Яндекс</option>
+        <option value="bing">Bing</option>
+        <option value="ddg">DuckDuckGo</option>
+        <option value="brave">Brave</option>
+      </select>
+    </div>
+    <div class="s-row">
+      <span class="ms s-ico">open_in_new</span>
+      <div class="s-rc"><div class="s-rl">Открывать в новой вкладке</div></div>
+      <div class="sw rpl" id="sw-newtab" onclick="tog('newtab')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row">
+      <span class="ms s-ico">hub</span>
+      <div class="s-rc"><div class="s-rl">Показывать чипы поисковиков</div><div class="s-rs">Панель быстрого выбора</div></div>
+      <div class="sw rpl" id="sw-engchips" onclick="tog('engchips')"><div class="sw-th"></div></div>
+    </div>
+
+    <!-- САЙТЫ -->
+    <div class="s-sec" style="margin-top:10px"><div class="s-sec-title">Сохранённые сайты</div></div>
+    <div class="s-div"></div>
+
+    <div class="s-row">
+      <span class="ms s-ico">bookmarks</span>
+      <div class="s-rc"><div class="s-rl">Показывать сайты</div></div>
+      <div class="sw rpl" id="sw-sites" onclick="tog('sites')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">grid_view</span>
+      <div class="s-rc"><div class="s-rl">Режим отображения</div></div>
+      <div class="seg">
+        <button class="seg-btn" id="vm-grid" onclick="setVm('grid')"><span class="ms" style="font-size:14px">apps</span></button>
+        <button class="seg-btn" id="vm-list" onclick="setVm('list')"><span class="ms" style="font-size:14px">view_list</span></button>
+      </div>
+    </div>
+    <div class="s-row">
+      <span class="ms s-ico">emoji_emotions</span>
+      <div class="s-rc"><div class="s-rl">Показывать значки</div><div class="s-rs">Выкл — аббревиатура названия</div></div>
+      <div class="sw rpl" id="sw-icons" onclick="tog('icons')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row">
+      <span class="ms s-ico">label</span>
+      <div class="s-rc"><div class="s-rl">Показывать названия</div><div class="s-rs">Подпись под значком</div></div>
+      <div class="sw rpl" id="sw-labels" onclick="tog('labels')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">photo_size_select_large</span>
+      <div class="s-rc"><div class="s-rl">Размер значков</div></div>
+      <div class="seg">
+        <button class="seg-btn" id="sz-s" onclick="setSz('s')">S</button>
+        <button class="seg-btn" id="sz-m" onclick="setSz('m')">M</button>
+        <button class="seg-btn" id="sz-l" onclick="setSz('l')">L</button>
+      </div>
+    </div>
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">rounded_corner</span>
+      <div class="s-rc"><div class="s-rl">Форма значков</div></div>
+      <div class="seg">
+        <button class="seg-btn" id="sh-r" onclick="setSh('r')">▣</button>
+        <button class="seg-btn" id="sh-c" onclick="setSh('c')">⬤</button>
+        <button class="seg-btn" id="sh-s" onclick="setSh('s')">■</button>
+      </div>
+    </div>
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">background_replace</span>
+      <div class="s-rc"><div class="s-rl">Цвет фона значков</div></div>
+      <div class="seg">
+        <button class="seg-btn" id="bg-accent" onclick="setBg('accent')">Акцент</button>
+        <button class="seg-btn" id="bg-site" onclick="setBg('site')">Свой</button>
+        <button class="seg-btn" id="bg-neutral" onclick="setBg('neutral')">Нейтр.</button>
+      </div>
+    </div>
+
+    <!-- ПОГОДА -->
+    <div class="s-sec" style="margin-top:10px"><div class="s-sec-title">Погода</div></div>
+    <div class="s-div"></div>
+
+    <div class="s-row">
+      <span class="ms s-ico">wb_sunny</span>
+      <div class="s-rc"><div class="s-rl">Показывать погоду</div></div>
+      <div class="sw rpl" id="sw-weather" onclick="tog('weather')"><div class="sw-th"></div></div>
+    </div>
+    <button class="s-row rpl" onclick="openCityM()">
+      <span class="ms s-ico">location_on</span>
+      <div class="s-rc"><div class="s-rl">Город</div><div class="s-rs" id="city-sub">Не задан</div></div>
+      <span class="ms" style="color:var(--md-on-surf-var);font-size:20px">chevron_right</span>
+    </button>
+    <div class="s-row" style="cursor:default">
+      <span class="ms s-ico">device_thermostat</span>
+      <div class="s-rc"><div class="s-rl">Единицы температуры</div></div>
+      <div class="seg">
+        <button class="seg-btn" id="ut-c" onclick="setUnit('C')">°C</button>
+        <button class="seg-btn" id="ut-f" onclick="setUnit('F')">°F</button>
+      </div>
+    </div>
+    <div class="s-row">
+      <span class="ms s-ico">view_week</span>
+      <div class="s-rc"><div class="s-rl">Прогноз на 5 дней</div></div>
+      <div class="sw rpl" id="sw-forecast" onclick="tog('forecast')"><div class="sw-th"></div></div>
+    </div>
+    <div class="s-row">
+      <span class="ms s-ico">water_drop</span>
+      <div class="s-rc"><div class="s-rl">Доп. метрики</div><div class="s-rs">Влажность, ветер, ощущается</div></div>
+      <div class="sw rpl" id="sw-wstats" onclick="tog('wstats')"><div class="sw-th"></div></div>
+    </div>
+
+    <!-- ДАННЫЕ -->
+    <div class="s-sec" style="margin-top:10px"><div class="s-sec-title">Данные и сброс</div></div>
+    <div class="s-div"></div>
+    <button class="s-row rpl" onclick="resetSites()">
+      <span class="ms s-ico" style="color:var(--md-error)">restart_alt</span>
+      <div class="s-rc"><div class="s-rl" style="color:var(--md-error)">Сбросить сайты</div></div>
+    </button>
+    <button class="s-row rpl" onclick="resetSettings()">
+      <span class="ms s-ico" style="color:var(--md-error)">settings_backup_restore</span>
+      <div class="s-rc"><div class="s-rl" style="color:var(--md-error)">Сбросить настройки</div></div>
+    </button>
+
+  </div><!-- /s-body -->
+</div><!-- /s-panel -->
+</div><!-- /s-overlay -->
+
+<!-- SITE MODAL -->
+<div class="modal-ov" id="site-m-ov" onclick="closeM('site-m-ov',event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="site-m-title">Добавить сайт</div>
+    <div class="tf" id="tf-name">
+      <span class="tf-lbl">Название</span>
+      <input class="tf-inp" id="inp-name" type="text" oninput="tfv('tf-name','inp-name')" autocomplete="off"/>
+    </div>
+    <div class="tf" id="tf-url">
+      <span class="tf-lbl">Адрес (URL)</span>
+      <input class="tf-inp" id="inp-url" type="url" placeholder=" " oninput="tfv('tf-url','inp-url')" autocomplete="off"/>
+    </div>
+<div class="small-label">Значок</div>
+<div class="em-grid" id="em-grid"></div>
+
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="inp-custom-emoji" class="tf-inp" type="text" placeholder="Добавить свой значок"
+       style="padding:10px 12px;background:var(--md-surf-highest);border-radius:8px" />
+  <button class="btn btn-tonal rpl" type="button" onclick="addCustomEmoji()" style="justify-content:center;text-align:center;">Добавить</button>
+</div>
+
+<div class="m-actions">
+      <button class="btn btn-text rpl" onclick="document.getElementById('site-m-ov').classList.remove('show')">Отмена</button>
+<button class="btn btn-filled rpl" onclick="saveSite()"><span class="ms" style="font-size:18px">check</span> Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- CITY MODAL -->
+<div class="modal-ov" id="city-m-ov" onclick="closeM('city-m-ov',event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Настройка города</div>
+    <div class="tf" id="tf-city">
+      <span class="tf-lbl">Название города</span>
+      <input class="tf-inp" id="inp-city" type="text" placeholder=" " oninput="tfv('tf-city','inp-city')" autocomplete="off" onkeydown="if(event.key==='Enter')saveCity()"/>
+    </div>
+    <div class="small-label" style="color:var(--md-on-surf-var)">Например: Москва, Санкт-Петербург, London</div>
+    <div class="m-actions">
+      <button class="btn btn-text rpl" onclick="document.getElementById('city-m-ov').classList.remove('show')">Отмена</button>
+      <button class="btn btn-filled rpl" onclick="saveCity()"><span class="ms" style="font-size:18px">check</span> Применить</button>
+    </div>
+  </div>
+</div>
+
+<!-- CTX -->
+<div class="ctx" id="ctx">
+  <button class="ctx-item rpl" onclick="ctxOpen()"><span class="ms">open_in_new</span>Открыть</button>
+  <button class="ctx-item rpl" onclick="ctxEdit()"><span class="ms">edit</span>Изменить</button>
+  <button class="ctx-item danger rpl" onclick="ctxDelete()"><span class="ms">delete</span>Удалить</button>
+</div>
+
+<!-- SNACK -->
+<div class="snack" id="snack">
+  <span id="snack-msg" style="flex:1"></span>
+  <button class="snack-action" onclick="hideSnack()">OK</button>
+</div>
+
+<script>
+/* ═══════════════════════════ DATA / STATE ═══════════════════════════ */
+
+const ENGINES_MAP = {
+  google: { name:'Google',     url:'https://google.com/search?q=' },
+  yandex: { name:'Яндекс',     url:'https://yandex.ru/search/?text=' },
+  bing:   { name:'Bing',       url:'https://bing.com/search?q=' },
+  ddg:    { name:'DuckDuckGo', url:'https://duckduckgo.com/?q=' },
+  brave:  { name:'Brave',      url:'https://search.brave.com/search?q=' },
+};
+
+const ACCENTS = [
+  { id:'purple', name:'Фиолетовый',
+    dark:{ p80:'#D0BCFF',p40:'#6750A4',p30:'#4F378B',p20:'#381E72',p90:'#EADDFF',p10:'#21005D',
+           s30:'#4A4458',s90:'#E8DEF8',s10:'#1D192B',t30:'#633B48',t90:'#FFD8E4',t10:'#31111D', color:'#D0BCFF'},
+    light:{ p80:'#D0BCFF',p40:'#6750A4',p30:'#4F378B',p20:'#381E72',p90:'#EADDFF',p10:'#21005D',
+            s30:'#4A4458',s90:'#E8DEF8',s10:'#1D192B',t30:'#633B48',t90:'#FFD8E4',t10:'#31111D', color:'#6750A4'} },
+  { id:'blue', name:'Синий',
+    dark:{ p80:'#9ECAFF',p40:'#0061A4',p30:'#00497D',p20:'#003258',p90:'#D1E4FF',p10:'#001D36',
+           s30:'#354A5E',s90:'#D1E4FF',s10:'#0D1D2C',t30:'#4E3248',t90:'#FBD7F3',t10:'#1E0A1C', color:'#9ECAFF'},
+    light:{ p80:'#9ECAFF',p40:'#0061A4',p30:'#00497D',p20:'#003258',p90:'#D1E4FF',p10:'#001D36',
+            s30:'#354A5E',s90:'#D1E4FF',s10:'#0D1D2C',t30:'#4E3248',t90:'#FBD7F3',t10:'#1E0A1C', color:'#0061A4'} },
+  { id:'green', name:'Зелёный',
+    dark:{ p80:'#79DC77',p40:'#1E6B1E',p30:'#075108',p20:'#003A00',p90:'#C1F2BC',p10:'#002200',
+           s30:'#3A4E35',s90:'#CDE9C3',s10:'#0C1F0B',t30:'#534428',t90:'#FAE096',t10:'#221B00', color:'#79DC77'},
+    light:{ p80:'#79DC77',p40:'#1E6B1E',p30:'#075108',p20:'#003A00',p90:'#C1F2BC',p10:'#002200',
+            s30:'#3A4E35',s90:'#CDE9C3',s10:'#0C1F0B',t30:'#534428',t90:'#FAE096',t10:'#221B00', color:'#1E6B1E'} },
+  { id:'red', name:'Красный',
+    dark:{ p80:'#FFB4AB',p40:'#BA1A1A',p30:'#93000A',p20:'#690005',p90:'#FFDAD6',p10:'#410002',
+           s30:'#5B3C3C',s90:'#FFDAD6',s10:'#2D1516',t30:'#564430',t90:'#EFE0BB',t10:'#1E1500', color:'#FFB4AB'},
+    light:{ p80:'#FFB4AB',p40:'#BA1A1A',p30:'#93000A',p20:'#690005',p90:'#FFDAD6',p10:'#410002',
+            s30:'#5B3C3C',s90:'#FFDAD6',s10:'#2D1516',t30:'#564430',t90:'#EFE0BB',t10:'#1E1500', color:'#BA1A1A'} },
+  { id:'orange', name:'Оранжевый',
+    dark:{ p80:'#FFB77C',p40:'#8B5000',p30:'#6A3B00',p20:'#4C2A00',p90:'#FFDCBE',p10:'#2C1700',
+           s30:'#5C4432',s90:'#FFDCBE',s10:'#2B1B0E',t30:'#4E5122',t90:'#E5E6A4',t10:'#1B1D00', color:'#FFB77C'},
+    light:{ p80:'#FFB77C',p40:'#8B5000',p30:'#6A3B00',p20:'#4C2A00',p90:'#FFDCBE',p10:'#2C1700',
+            s30:'#5C4432',s90:'#FFDCBE',s10:'#2B1B0E',t30:'#4E5122',t90:'#E5E6A4',t10:'#1B1D00', color:'#8B5000'} },
+  { id:'teal', name:'Бирюзовый',
+    dark:{ p80:'#4DD8E1',p40:'#00696F',p30:'#004F53',p20:'#00363A',p90:'#9EF0F5',p10:'#001F23',
+           s30:'#2F4E52',s90:'#ADE3E8',s10:'#061F22',t30:'#4D3E5B',t90:'#E8DAEA',t10:'#1B1226', color:'#4DD8E1'},
+    light:{ p80:'#4DD8E1',p40:'#00696F',p30:'#004F53',p20:'#00363A',p90:'#9EF0F5',p10:'#001F23',
+            s30:'#2F4E52',s90:'#ADE3E8',s10:'#061F22',t30:'#4D3E5B',t90:'#E8DAEA',t10:'#1B1226', color:'#00696F'} },
+  { id:'pink', name:'Розовый',
+    dark:{ p80:'#FFB1C8',p40:'#9C2D6A',p30:'#7B1754',p20:'#5A013D',p90:'#FFD8E7',p10:'#390027',
+           s30:'#56394A',s90:'#F2DAEA',s10:'#23101B',t30:'#50402B',t90:'#EDE0C7',t10:'#1D1705', color:'#FFB1C8'},
+    light:{ p80:'#FFB1C8',p40:'#9C2D6A',p30:'#7B1754',p20:'#5A013D',p90:'#FFD8E7',p10:'#390027',
+            s30:'#56394A',s90:'#F2DAEA',s10:'#23101B',t30:'#50402B',t90:'#EDE0C7',t10:'#1D1705', color:'#9C2D6A'} },
+  { id:'yellow', name:'Янтарный',
+    dark:{ p80:'#F0C84E',p40:'#6E5D00',p30:'#544500',p20:'#3B2F00',p90:'#F5E16B',p10:'#221C00',
+           s30:'#4E4A2C',s90:'#E9E4B7',s10:'#1D1A04',t30:'#4B3E3A',t90:'#F4DEDA',t10:'#1D1210', color:'#F0C84E'},
+    light:{ p80:'#F0C84E',p40:'#6E5D00',p30:'#544500',p20:'#3B2F00',p90:'#F5E16B',p10:'#221C00',
+            s30:'#4E4A2C',s90:'#E9E4B7',s10:'#1D1A04',t30:'#4B3E3A',t90:'#F4DEDA',t10:'#1D1210', color:'#6E5D00'} },
+  { id:'grey', name:'Серый',
+    dark:{ p80:'#C9C5CA',p40:'#605D62',p30:'#484649',p20:'#313033',p90:'#E6E1E5',p10:'#1C1B1F',
+           s30:'#44414A',s90:'#E4DFEB',s10:'#1B1724',t30:'#4A4458',t90:'#E8DEF8',t10:'#1D192B', color:'#C9C5CA'},
+    light:{ p80:'#C9C5CA',p40:'#605D62',p30:'#484649',p20:'#313033',p90:'#E6E1E5',p10:'#1C1B1F',
+            s30:'#44414A',s90:'#E4DFEB',s10:'#1B1724',t30:'#4A4458',t90:'#E8DEF8',t10:'#1D192B', color:'#605D62'} },
+];
+
+const DEF_S = {
+  dark:true, accent:'grey',
+  blobs:true, blobOpacity:20,
+  clock:true, greet:true, date:true, timeFmt:'24', clockFontSize:'m',
+  search:true, engine:'google', newtab:true, engchips:true,
+  sites:true, viewMode:'grid', icons:true, labels:true, iconSize:'m', iconShape:'r', iconBg:'site',
+  weather:true, city:'', unit:'C', forecast:true, wstats:true,
+};
+
+let S = Object.assign({}, DEF_S, JSON.parse(localStorage.getItem('nd-s2') || '{}'));
+
+const DEF_SITES = [
+  {id:1,name:'YouTube',  url:'https://youtube.com',       emoji:'▶️',abbr:'YT'},
+  {id:2,name:'GitHub',   url:'https://github.com',        emoji:'🐙',abbr:'GH'},
+  {id:3,name:'Gmail',    url:'https://mail.google.com',   emoji:'✉️',abbr:'GM'},
+  {id:4,name:'Figma',    url:'https://figma.com',         emoji:'🎨',abbr:'FG'},
+  {id:5,name:'Wikipedia',url:'https://wikipedia.org',     emoji:'📖',abbr:'WK'},
+  {id:6,name:'Reddit',   url:'https://reddit.com',        emoji:'🤖',abbr:'RD'},
+  {id:7,name:'Telegram', url:'https://web.telegram.org',  emoji:'✈️',abbr:'TG'},
+  {id:8,name:'Spotify',  url:'https://open.spotify.com',  emoji:'🎵',abbr:'SP'},
+];
+const BASE_EMOJIS=['🌐','⭐','🔥','💡','📌','🎯','🚀','💎','📊','🛒','🎮','📰','🏠','💼','🔬','🎓','🎬','🎧','🏆','🌙','⚡','🌍','🔗','💻','🧩','📱','🗂️','🎲','🖥️','📷'];
+
+let customEmojis = JSON.parse(localStorage.getItem('nd-custom-emojis2') || '[]');
+let EMOJIS = [...new Set([...BASE_EMOJIS, ...customEmojis])];
+
+function saveCustomEmojis(){
+  localStorage.setItem('nd-custom-emojis2', JSON.stringify(customEmojis));
+}
+
+function removeCustomEmoji(em){
+  if(!customEmojis.includes(em)) return; // стандартные не удаляем
+  if(!confirm(`Удалить значок ${em}?`)) return;
+
+  customEmojis = customEmojis.filter(x => x !== em);
+  saveCustomEmojis();
+  EMOJIS = [...new Set([...BASE_EMOJIS, ...customEmojis])];
+
+  if(selEmoji === em) selEmoji = '🌐';
+  buildEmGrid();
+  toast('Значок удален');
+}
+
+let sites = JSON.parse(localStorage.getItem('nd-sites2') || 'null') || JSON.parse(JSON.stringify(DEF_SITES));
+let nextId = Math.max(...sites.map(s=>s.id), 0)+1;
+let selEmoji = '🌐';
+let ctxId = null;
+let editSite = null;
+let snackT;
+let clockIv;
+let wData = null;
+
+/* ════ SAVE ════ */
+const saveS = () => localStorage.setItem('nd-s2', JSON.stringify(S));
+const saveSites = () => localStorage.setItem('nd-sites2', JSON.stringify(sites));
+
+/* ════ RIPPLE ════ */
+document.addEventListener('click', e => {
+  const el = e.target.closest('.rpl');
+  if(!el) return;
+  const r = document.createElement('span');
+  r.className = 'rp';
+  const rc = el.getBoundingClientRect();
+  const sz = Math.max(rc.width, rc.height);
+  r.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX-rc.left-sz/2}px;top:${e.clientY-rc.top-sz/2}px`;
+  el.appendChild(r);
+  r.addEventListener('animationend', ()=>r.remove());
+});
+
+/* ════ ACCENT / PALETTE ════ */
+function applyAccent() {
+  const acc = ACCENTS.find(a=>a.id===S.accent) || ACCENTS[0];
+  const pal = S.dark ? acc.dark : acc.light;
+  const root = document.documentElement;
+  Object.entries(pal).forEach(([k,v]) => {
+    // map keys like p80 → --p80, s30 → --s30, t30 → --t30
+    if(k !== 'color') root.style.setProperty('--'+k, v);
+  });
+  // rebuild blob colors
+  applyBlobColors();
+}
+
+function applyBlobColors() {
+  const acc = ACCENTS.find(a=>a.id===S.accent) || ACCENTS[0];
+  const pal = S.dark ? acc.dark : acc.light;
+  // Use tonal palette for blobs: blob1=primary, blob2=tertiary, blob3=secondary — all dark containers
+  const b1 = pal.p30 || '#4F378B';
+  const b2 = pal.t30 || '#633B48';
+  const b3 = pal.s30 || '#4A4458';
+  const mid = S.dark ? '#1C1B1F' : '#FFFBFE';
+  document.getElementById('blob1').style.background = `radial-gradient(circle at 40% 40%, ${b1}, ${mid})`;
+  document.getElementById('blob2').style.background = `radial-gradient(circle at 60% 60%, ${b2}, ${mid})`;
+  document.getElementById('blob3').style.background = `radial-gradient(circle at 50% 50%, ${b3}, ${mid})`;
+}
+
+function buildAccentRow() {
+  const row = document.getElementById('accent-row');
+  row.innerHTML = '';
+  ACCENTS.forEach(acc => {
+    const pal = S.dark ? acc.dark : acc.light;
+    const d = document.createElement('div');
+    d.className = 'ac-dot rpl' + (S.accent===acc.id?' sel':'');
+    d.style.background = pal.color;
+    d.title = acc.name;
+    d.onclick = () => {
+      S.accent = acc.id;
+      saveS(); applyAccent(); buildAccentRow();
+      renderGrid(); toast('Акцент: '+acc.name);
+    };
+    row.appendChild(d);
+  });
+}
+
+/* ════ THEME ════ */
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', S.dark?'dark':'light');
+  setSw('dark', S.dark);
+  applyAccent();
+}
+
+/* ════ BLOBS ════ */
+function applyBlobs() {
+  const el = document.getElementById('blobs');
+  el.style.display = S.blobs ? '' : 'none';
+  const op = S.blobOpacity / 100;
+  document.getElementById('blob1').style.opacity = op + 0.04;
+  document.getElementById('blob2').style.opacity = op;
+  document.getElementById('blob3').style.opacity = Math.max(op-0.04, 0.04);
+  document.getElementById('sl-blob').value = S.blobOpacity;
+}
+
+/* ════ CLOCK ════ */
+const CLOCK_SIZES = {s:'clamp(40px,8vw,60px)', m:'clamp(52px,11vw,90px)', l:'clamp(68px,15vw,120px)'};
+function startClock() {
+  clearInterval(clockIv);
+  tick();
+  clockIv = setInterval(tick, 1000);
+}
+function tick() {
+  const now = new Date();
+  let h = now.getHours(), m = now.getMinutes();
+  let ts;
+  if(S.timeFmt==='12'){
+    const ap = h>=12?'PM':'AM';
+    h = h%12||12;
+    ts = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')} ${ap}`;
+  } else {
+    ts = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+  }
+  document.getElementById('clock').textContent = ts;
+  document.getElementById('clock').style.fontSize = CLOCK_SIZES[S.clockFontSize] || CLOCK_SIZES.m;
+
+  const hr = now.getHours();
+  document.getElementById('greeting').textContent =
+    hr<6?'Доброй ночи':hr<12?'Доброе утро':hr<18?'Добрый день':'Добрый вечер';
+
+  const D=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+  const M=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  document.getElementById('datestr').textContent = `${D[now.getDay()]}, ${now.getDate()} ${M[now.getMonth()]}`;
+}
+function setFontSize(s){ S.clockFontSize=s; saveS(); syncSegs(); tick(); }
+function setFmt(f){ S.timeFmt=f; saveS(); syncSegs(); tick(); }
+
+/* ════ ENGINES ════ */
+function renderEngines() {
+  const row = document.getElementById('engines-row');
+  row.style.display = (S.search && S.engchips) ? '' : 'none';
+  row.innerHTML = '';
+  Object.entries(ENGINES_MAP).forEach(([k,e]) => {
+    const b = document.createElement('button');
+    b.className = 'eng-chip rpl' + (k===S.engine?' active':'');
+    b.textContent = e.name;
+    b.onclick = () => { S.engine=k; saveS(); renderEngines(); document.getElementById('eng-sel').value=k; };
+    row.appendChild(b);
+  });
+  document.getElementById('eng-sel').value = S.engine;
+}
+
+/* ════ QUICK GRID ════ */
+const SZ = {s:'38px',m:'52px',l:'66px'};
+const SH = {r:'12px',c:'9999px',s:'4px'};
+
+function getFaviconBg(site) {
+  if(S.iconBg === 'accent') {
+    const acc = ACCENTS.find(a=>a.id===S.accent)||ACCENTS[0];
+    const pal = S.dark ? acc.dark : acc.light;
+    return pal.s30;
+  }
+  // 'neutral' and 'site' both use same consistent neutral — no per-site rainbow bg
+  return S.dark ? '#2B2930' : '#E6E0E9';
+}
+
+function getTextColor() {
+  if(S.iconBg === 'accent') {
+    const acc = ACCENTS.find(a=>a.id===S.accent)||ACCENTS[0];
+    const pal = S.dark ? acc.dark : acc.light;
+    return pal.s90;
+  }
+  return S.dark ? '#E6E1E5' : '#1C1B1F';
+}
+
+function abbr(name) {
+  return name.split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2);
+}
+
+function renderGrid() {
+  const grid = document.getElementById('quick-grid');
+  const isList = S.viewMode === 'list';
+  grid.className = 'quick-grid' + (isList ? ' list-mode' : '');
+  const sitesSec = document.getElementById('sites-section');
+  sitesSec.style.display = S.sites ? '' : 'none';
+  grid.innerHTML = '';
+
+  const sz = SZ[S.iconSize] || '52px';
+  const sh = SH[S.iconShape] || '12px';
+  const fsz = parseInt(sz) * (S.icons ? 0.44 : 0.35);
+
+  sites.forEach(site => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-item rpl' + (isList?' list-item':'');
+    btn.dataset.id = site.id;
+
+    const bg = getFaviconBg(site);
+    const tc = getTextColor();
+    const inner = S.icons
+      ? `<span style="font-size:${fsz}px;line-height:1">${site.emoji}</span>`
+      : `<span style="font-size:${fsz}px;font-weight:700;color:${tc};letter-spacing:-.03em">${site.abbr||abbr(site.name)}</span>`;
+
+    const nameHtml = S.labels ? `<span class="q-label">${site.name}</span>` : '';
+
+    btn.innerHTML = `
+      <div class="q-favicon" style="width:${sz};height:${sz};border-radius:${sh};background:${bg};box-shadow:var(--el1)">${inner}</div>
+      ${nameHtml}
+    `;
+    btn.addEventListener('click', () => window.open(site.url, S.newtab?'_blank':'_self'));
+    btn.addEventListener('contextmenu', e => { e.preventDefault(); showCtx(e,site.id); });
+    grid.appendChild(btn);
+  });
+
+  // Add
+  const add = document.createElement('button');
+  add.className = 'quick-item q-add rpl' + (isList?' list-item':'');
+  add.innerHTML = `
+    <div class="q-favicon" style="width:${sz};height:${sz};border-radius:${sh}"><span class="ms">add</span></div>
+    ${S.labels ? '<span class="q-label">Добавить</span>' : ''}
+  `;
+  add.addEventListener('click', () => openSiteM());
+  grid.appendChild(add);
+}
+
+/* ════ WEATHER ════ */
+const WIC = {0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌦',55:'🌧',61:'🌧',63:'🌧',65:'🌧',71:'❄️',73:'❄️',75:'❄️',80:'🌦',81:'🌧',82:'🌧',95:'⛈',96:'⛈',99:'⛈'};
+const WD = {0:'Ясно',1:'Преимущественно ясно',2:'Переменная облачность',3:'Пасмурно',45:'Туман',48:'Туман',51:'Лёгкий дождь',53:'Дождь',55:'Сильный дождь',61:'Дождь',63:'Умеренный дождь',65:'Сильный дождь',71:'Снег',73:'Снег',75:'Сильный снег',80:'Ливень',81:'Ливень',82:'Сильный ливень',95:'Гроза',96:'Гроза с градом',99:'Гроза с градом'};
+
+async function fetchWeather() {
+  if(!S.city) return;
+  const card = document.getElementById('weather-card');
+  card.innerHTML = '<div class="w-loading"><span class="ms">sync</span> Загрузка…</div>';
+  try {
+    const g = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(S.city)}&count=1&language=ru`);
+    const gd = await g.json();
+    if(!gd.results?.length) throw new Error('Город не найден');
+    const {latitude,longitude,name,country} = gd.results[0];
+    const w = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weathercode,windspeed_10m,relativehumidity_2m,apparent_temperature&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=6`);
+    const wd = await w.json();
+    wData = {...wd, city:name, country};
+    renderWeather();
+  } catch(e) {
+    card.innerHTML = `<div class="w-loading" style="color:var(--md-error)"><span class="ms">error</span> ${e.message}</div>`;
+  }
+}
+
+function renderWeather() {
+  const ws = document.getElementById('weather-section');
+  ws.style.display = S.weather ? '' : 'none';
+  if(!S.weather || !wData) return;
+  const card = document.getElementById('weather-card');
+  const C2 = t => S.unit==='F' ? Math.round(t*9/5+32) : Math.round(t);
+  const u = S.unit==='F'?'°F':'°C';
+  const cur = wData.current;
+  const daily = wData.daily;
+  const code = cur.weathercode;
+  const ic = WIC[code]||'🌡';
+  const desc = WD[code]||'—';
+  const DS = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+
+  const statsHtml = S.wstats ? `
+    <div class="w-stats">
+      <div class="w-stat"><div class="w-stat-lbl">Ощущается</div><div class="w-stat-val">${C2(cur.apparent_temperature)}${u}</div></div>
+      <div class="w-stat"><div class="w-stat-lbl">Влажность</div><div class="w-stat-val">${cur.relativehumidity_2m}%</div></div>
+      <div class="w-stat"><div class="w-stat-lbl">Ветер</div><div class="w-stat-val">${Math.round(cur.windspeed_10m)} км/ч</div></div>
+    </div>` : '';
+
+  const forecastHtml = S.forecast ? `
+    <div class="w-days-row">
+      ${daily.time.slice(1,6).map((d,i)=>{
+        const dt=new Date(d);
+        const dc=daily.weathercode[i+1];
+        return `<div class="w-day">
+          <div class="w-day-name">${DS[dt.getDay()]}</div>
+          <div class="w-day-icon">${WIC[dc]||'🌡'}</div>
+          <div class="w-day-max">${C2(daily.temperature_2m_max[i+1])}${u}</div>
+          <div class="w-day-min">${C2(daily.temperature_2m_min[i+1])}${u}</div>
+        </div>`;
+      }).join('')}
+    </div>` : '';
+
+  card.innerHTML = `
+    <div class="w-main-row">
+      <div class="w-left">
+        <div class="w-icon-big">${ic}</div>
+        <div class="w-temp-row">
+          <div class="w-temp">${C2(cur.temperature_2m)}</div>
+          <div class="w-feels" style="margin-bottom:8px">${u}</div>
+        </div>
+        <div class="w-desc">${desc}</div>
+        <div class="w-city-name">${wData.city}, ${wData.country}</div>
+      </div>
+      <div class="w-right">
+        <div class="w-badge">Сейчас</div>
+      </div>
+    </div>
+    ${statsHtml}
+    ${forecastHtml}
+  `;
+}
+
+/* ════ SETTINGS ════ */
+function openSettings() { document.getElementById('s-overlay').classList.add('show') }
+function closeSettings() { document.getElementById('s-overlay').classList.remove('show') }
+function ov(e) { if(e.target===document.getElementById('s-overlay')) closeSettings() }
+
+function setSw(k, v) {
+  const el = document.getElementById('sw-'+k);
+  if(el) el.classList.toggle('on', !!v);
+}
+function syncAll() {
+  // switches
+  ['dark','blobs','clock','greet','date','search','newtab','engchips','sites','icons','labels','weather','forecast','wstats'].forEach(k => setSw(k, S[k]));
+  // segs
+  syncSegs();
+  // city
+  document.getElementById('city-sub').textContent = S.city || 'Не задан';
+  document.getElementById('eng-sel').value = S.engine;
+}
+function syncSegs() {
+  const set = (ids, active) => ids.forEach(id => { const el=document.getElementById(id); if(el) el.classList.toggle('on', el.id===active) });
+  set(['fmt-24','fmt-12'], 'fmt-'+S.timeFmt);
+  set(['fs-s','fs-m','fs-l'], 'fs-'+S.clockFontSize);
+  set(['vm-grid','vm-list'], 'vm-'+S.viewMode);
+  set(['sz-s','sz-m','sz-l'], 'sz-'+S.iconSize);
+  set(['sh-r','sh-c','sh-s'], 'sh-'+S.iconShape);
+  set(['bg-accent','bg-site','bg-neutral'], 'bg-'+S.iconBg);
+  set(['ut-c','ut-f'], 'ut-'+S.unit);
+}
+
+function tog(k) {
+  S[k] = !S[k];
+  saveS();
+  setSw(k, S[k]);
+  // side effects
+  if(k==='dark'){ applyTheme(); buildAccentRow(); renderGrid(); }
+  if(k==='blobs') applyBlobs();
+  if(k==='clock'){ const h=document.getElementById('hero'); h.style.display=S.clock?'':'none'; if(S.clock)startClock(); else clearInterval(clockIv); }
+  if(k==='greet') document.getElementById('greeting').classList.toggle('gone',!S.greet);
+  if(k==='date')  document.getElementById('datestr').classList.toggle('gone',!S.date);
+  if(k==='search'){ document.getElementById('search-section').style.display=S.search?'':'none'; renderEngines(); }
+  if(k==='engchips') renderEngines();
+  if(['sites','icons','labels','newtab'].includes(k)) renderGrid();
+  if(k==='weather'){ document.getElementById('weather-section').style.display=S.weather?'':'none'; if(S.weather&&S.city&&!wData)fetchWeather(); }
+  if(k==='forecast'||k==='wstats') renderWeather();
+}
+
+function setEng(v){ S.engine=v; saveS(); renderEngines(); }
+function setVm(v){ S.viewMode=v; saveS(); syncSegs(); renderGrid(); }
+function setSz(v){ S.iconSize=v; saveS(); syncSegs(); renderGrid(); }
+function setSh(v){ S.iconShape=v; saveS(); syncSegs(); renderGrid(); }
+function setBg(v){ S.iconBg=v; saveS(); syncSegs(); renderGrid(); }
+function setUnit(v){ S.unit=v; saveS(); syncSegs(); if(wData)renderWeather(); }
+
+/* ════ CITY ════ */
+function openCityM(){ document.getElementById('inp-city').value=S.city||''; tfv('tf-city','inp-city'); document.getElementById('city-m-ov').classList.add('show') }
+function saveCity(){
+  const c=document.getElementById('inp-city').value.trim();
+  if(!c){ toast('Введите название города'); return; }
+  S.city=c; saveS();
+  document.getElementById('city-sub').textContent=c;
+  document.getElementById('city-m-ov').classList.remove('show');
+  wData=null;
+  if(S.weather) fetchWeather();
+  toast('Город: '+c);
+}
+
+/* ════ SITE MODAL ════ */
+function openSiteM(site) {
+  editSite=site||null;
+  document.getElementById('site-m-title').textContent=site?'Изменить сайт':'Добавить сайт';
+  document.getElementById('inp-name').value=site?.name||'';
+  document.getElementById('inp-url').value=site?.url||'';
+  selEmoji=site?.emoji||'🌐';
+  tfv('tf-name','inp-name'); tfv('tf-url','inp-url');
+  buildEmGrid();
+  document.getElementById('site-m-ov').classList.add('show');
+}
+function saveSite(){
+  const name=document.getElementById('inp-name').value.trim();
+  let url=document.getElementById('inp-url').value.trim();
+  if(!name||!url){ toast('Заполните все поля'); return; }
+  if(!/^https?:\/\//i.test(url)) url='https://'+url;
+  if(editSite){
+    const s=sites.find(s=>s.id===editSite.id);
+    if(s){s.name=name;s.url=url;s.emoji=selEmoji;s.abbr=abbr(name)}
+    toast('Сайт обновлён ✏️');
+  } else {
+    // Use same neutral bg as default sites so new sites look consistent
+    const neutralBg = S.dark ? '#2B2930' : '#E6E0E9';
+    sites.push({id:nextId++,name,url,emoji:selEmoji,abbr:abbr(name),bg:neutralBg});
+    toast('Сайт добавлен 🎉');
+  }
+  saveSites(); renderGrid();
+  document.getElementById('site-m-ov').classList.remove('show');
+  editSite=null;
+}
+function buildEmGrid(){
+  document.getElementById('em-grid').innerHTML = EMOJIS.map(em => {
+    const isCustom = customEmojis.includes(em);
+    return `<button class="em-btn rpl${em===selEmoji?' sel':''}"
+      title="${isCustom ? 'ПКМ: удалить' : ''}"
+      onclick="selEm('${em}',this)"
+      oncontextmenu="removeCustomEmoji('${em}'); return false;">${em}</button>`;
+  }).join('');
+}
+function addCustomEmoji(){
+  const inp = document.getElementById('inp-custom-emoji');
+  if(!inp) return;
+
+  const em = inp.value.trim();
+  if(!em){
+    toast('Введите значок');
+    return;
+  }
+
+  if(!customEmojis.includes(em) && !BASE_EMOJIS.includes(em)){
+    customEmojis.push(em);
+    customEmojis = [...new Set(customEmojis)].slice(-80);
+    saveCustomEmojis();
+    EMOJIS = [...new Set([...BASE_EMOJIS, ...customEmojis])];
+  }
+
+  selEmoji = em;
+  inp.value = '';
+  buildEmGrid();
+  toast('Значок добавлен');
+}
+function selEm(em,btn){
+  selEmoji=em;
+  document.querySelectorAll('.em-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+/* ════ CTX ════ */
+function showCtx(e,id){
+  ctxId=id;
+  const m=document.getElementById('ctx');
+  m.classList.add('show');
+  let x=e.clientX,y=e.clientY;
+  if(x+180>innerWidth)x-=180;
+  if(y+130>innerHeight)y-=130;
+  m.style.left=x+'px';m.style.top=y+'px';
+}
+document.addEventListener('click',()=>document.getElementById('ctx').classList.remove('show'));
+function ctxOpen(){ const s=sites.find(s=>s.id===ctxId); if(s)window.open(s.url,S.newtab?'_blank':'_self') }
+function ctxEdit(){ const s=sites.find(s=>s.id===ctxId); if(s)openSiteM(s) }
+function ctxDelete(){ sites=sites.filter(s=>s.id!==ctxId); saveSites(); renderGrid(); toast('Удалено') }
+
+/* ════ SEARCH ════ */
+function onSearchInput(v){
+  const input = document.getElementById('s-in');
+  input.placeholder = v.trim().length > 0 ? '' : 'Поиск…';
+}
+function onKey(e){ if(e.key!=='Enter')return; const q=document.getElementById('s-in').value.trim(); if(!q)return; window.open((ENGINES_MAP[S.engine]||ENGINES_MAP.google).url+encodeURIComponent(q),S.newtab?'_blank':'_self') }
+function clearSearch(){ const i=document.getElementById('s-in'); i.value=''; onSearchInput(''); i.focus() }
+
+/* ════ TF ════ */
+function tfv(w,i){ document.getElementById(w).classList.toggle('v',document.getElementById(i).value.length>0) }
+
+/* ════ MODAL CLOSE ════ */
+function closeM(id,e){ if(!e||e.target===document.getElementById(id)) document.getElementById(id).classList.remove('show') }
+
+/* ════ SNACK ════ */
+function toast(msg){ const s=document.getElementById('snack'); document.getElementById('snack-msg').textContent=msg; s.classList.add('show'); clearTimeout(snackT); snackT=setTimeout(hideSnack,2800) }
+function hideSnack(){ document.getElementById('snack').classList.remove('show') }
+
+/* ════ RESET ════ */
+function resetSites(){ if(!confirm('Сбросить сайты к стандартным?'))return; sites=JSON.parse(JSON.stringify(DEF_SITES)); nextId=sites.length+1; saveSites(); renderGrid(); toast('Сайты сброшены') }
+function resetSettings(){ if(!confirm('Сбросить все настройки?'))return; S=Object.assign({},DEF_S); saveS(); location.reload() }
+
+/* ════ INIT ════ */
+function init() {
+  applyTheme();
+  applyBlobs();
+
+  // clock
+  if(!S.clock) { document.getElementById('hero').style.display='none' }
+  else { startClock() }
+  document.getElementById('greeting').classList.toggle('gone',!S.greet);
+  document.getElementById('datestr').classList.toggle('gone',!S.date);
+
+  // search
+  document.getElementById('search-section').style.display = S.search?'':'none';
+  renderEngines();
+
+  // sites
+  document.getElementById('sites-section').style.display = S.sites?'':'none';
+  renderGrid();
+
+  // weather
+  document.getElementById('weather-section').style.display = S.weather?'':'none';
+  if(S.weather && S.city) fetchWeather();
+  document.getElementById('city-sub').textContent = S.city||'Не задан';
+
+  syncAll();
+  buildAccentRow();
+}
+
+init();
+</script>
+</body>
+</html>
