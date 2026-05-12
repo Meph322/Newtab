@@ -160,7 +160,7 @@
   border:1.5px solid transparent;
   outline:none;
   padding:0 44px 0 24px;
-  font-family:inherit;font-size:16px;
+  font-family:inherit;font-size:18px;
   color:var(--md-on-surface);
   caret-color:var(--md-primary);
   box-shadow:var(--el1);
@@ -215,6 +215,9 @@
     .quick-item:hover{background:color-mix(in srgb,var(--md-on-surface) 9%,transparent);transform:translateY(-2px)}
     .quick-item:active{transform:translateY(0)}
     .quick-item.list-item{flex-direction:row;padding:10px 14px;gap:12px;justify-content:flex-start;border-radius:var(--r-m)}
+
+    .quick-item.dragging{opacity:.45}
+.quick-item.drag-over{outline:2px solid var(--md-primary);outline-offset:-2px}
 
     .q-favicon{
       display:flex;align-items:center;justify-content:center;
@@ -376,13 +379,95 @@
     .ib:hover{background:color-mix(in srgb,var(--md-on-surface) 9%,transparent)}
 
     /* CTX */
-    .ctx{position:fixed;z-index:500;background:var(--md-surf-high);border-radius:var(--r-m);box-shadow:var(--el3);overflow:hidden;display:none;flex-direction:column;min-width:164px;border:1px solid var(--md-outline-var)}
-    .ctx.show{display:flex}
+.ctx{
+  position:fixed;z-index:500;
+  background:var(--md-surf-high);
+  border-radius:var(--r-m);
+  box-shadow:var(--el3);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  min-width:164px;
+  border:1px solid var(--md-outline-var);
+
+  opacity:0;
+  transform:translateY(6px) scale(.98);
+  transform-origin:top left;
+  pointer-events:none;
+  visibility:hidden;
+  transition:opacity .16s ease, transform .2s cubic-bezier(.2,.8,.2,1), visibility 0s linear .2s;
+}
+.ctx-confirm{
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transform:translateY(-6px) scale(.98);
+  transform-origin:top;
+  border-top:1px solid transparent;
+  transition:
+    max-height .28s cubic-bezier(.2,.8,.2,1),
+    opacity .2s ease,
+    transform .28s cubic-bezier(.2,.8,.2,1),
+    border-color .2s ease;
+}
+
+.ctx.confirm .ctx-confirm{
+  max-height:170px;
+  opacity:1;
+  transform:translateY(0) scale(1);
+  border-top-color:var(--md-outline-var);
+}
+
+.ctx-confirm-title{
+  font-size:12px;
+  color:var(--md-on-surf-var);
+  padding:10px 14px 6px;
+  opacity:.9;
+}
+
+.ctx-confirm-actions{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding-bottom:4px;
+}
+
+.ctx-confirm .ctx-item{
+  opacity:0;
+  transform:translateX(-8px);
+  transition:opacity .18s ease, transform .22s cubic-bezier(.2,.8,.2,1), background .15s;
+}
+
+.ctx.confirm .ctx-confirm .ctx-item{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.ctx.confirm .ctx-confirm .ctx-item:nth-child(1){transition-delay:.04s}
+.ctx.confirm .ctx-confirm .ctx-item:nth-child(2){transition-delay:.08s}
+.ctx.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+  visibility:visible;
+  transition:opacity .16s ease, transform .2s cubic-bezier(.2,.8,.2,1), visibility 0s;
+}
     .ctx-item{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:14px;color:var(--md-on-surface);cursor:pointer;transition:background .15s;border:none;background:transparent;font-family:inherit;width:100%;text-align:left}
     .ctx-item:hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent)}
     .ctx-item .ms{font-size:18px;color:var(--md-on-surf-var)}
     .ctx-item.danger{color:var(--md-error)}
     .ctx-item.danger .ms{color:var(--md-error)}
+    .ctx-item{
+  transform:translateX(-6px);
+  opacity:0;
+  transition:transform .18s ease, opacity .18s ease, background .15s;
+}
+.ctx.show .ctx-item{
+  transform:translateX(0);
+  opacity:1;
+}
+.ctx.show .ctx-item:nth-child(1){transition-delay:.02s}
+.ctx.show .ctx-item:nth-child(2){transition-delay:.04s}
+.ctx.show .ctx-item:nth-child(3){transition-delay:.06s}
 
     /* Snack */
     .snack{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--md-inv-surf);color:var(--md-inv-on-surf);border-radius:var(--r-s);padding:13px 16px;display:flex;align-items:center;gap:14px;min-width:220px;max-width:500px;box-shadow:var(--el3);font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:600}
@@ -414,6 +499,36 @@
     /* Page spacing helper */
     .gap-sm{height:32px}
     .gap-md{height:44px}
+    
+    .profile-modal{max-width:560px}
+.profile-list{display:flex;flex-direction:column;gap:6px;max-height:320px;overflow:auto;padding-right:2px}
+
+.profile-item{
+  width:100%;
+  border:none;
+  background:transparent;
+  color:var(--md-on-surface);
+  border-radius:12px;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  transition:background .16s, transform .16s;
+  font-family:inherit;
+}
+.profile-item:hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent)}
+.profile-item.active{
+  background:var(--md-sec-cont);
+  color:var(--md-on-sec-cont);
+}
+.profile-item .ms{font-size:18px}
+@supports (view-transition-name: none){
+  ::view-transition-group(*) {
+    animation-duration: .24s;
+    animation-timing-function: cubic-bezier(.2,.8,.2,1);
+  }
+}
   </style>
 </head>
 <body>
@@ -485,6 +600,18 @@
     <div class="s-head-title">Настройки</div>
   </div>
   <div class="s-body">
+<!-- ПРОФИЛИ -->
+<div class="s-sec"><div class="s-sec-title">Профили</div></div>
+<div class="s-div"></div>
+
+<button class="s-row rpl" onclick="openProfileModal()">
+  <span class="ms s-ico">person</span>
+  <div class="s-rc">
+    <div class="s-rl">Активный профиль</div>
+    <div class="s-rs" id="profile-sub">—</div>
+  </div>
+  <span class="ms" style="color:var(--md-on-surf-var);font-size:20px">expand_more</span>
+</button>
 
     <!-- ВНЕШНИЙ ВИД -->
     <div class="s-sec"><div class="s-sec-title">Внешний вид</div></div>
@@ -564,17 +691,14 @@
       <div class="s-rc"><div class="s-rl">Показывать поиск</div></div>
       <div class="sw rpl" id="sw-search" onclick="tog('search')"><div class="sw-th"></div></div>
     </div>
-    <div class="s-row" style="cursor:default">
-      <span class="ms s-ico">language</span>
-      <div class="s-rc"><div class="s-rl">Поисковая система</div></div>
-      <select class="s-sel" id="eng-sel" onchange="setEng(this.value)">
-        <option value="google">Google</option>
-        <option value="yandex">Яндекс</option>
-        <option value="bing">Bing</option>
-        <option value="ddg">DuckDuckGo</option>
-        <option value="brave">Brave</option>
-      </select>
-    </div>
+<button class="s-row rpl" onclick="openEngineModal()">
+  <span class="ms s-ico">language</span>
+  <div class="s-rc">
+    <div class="s-rl">Поисковая система</div>
+    <div class="s-rs" id="engine-sub">—</div>
+  </div>
+  <span class="ms" style="color:var(--md-on-surf-var);font-size:20px">expand_more</span>
+</button>
     <div class="s-row">
       <span class="ms s-ico">open_in_new</span>
       <div class="s-rc"><div class="s-rl">Открывать в новой вкладке</div></div>
@@ -675,6 +799,16 @@
     </div>
 
     <!-- ДАННЫЕ -->
+     <button class="s-row rpl" onclick="exportData()">
+  <span class="ms s-ico">download</span>
+  <div class="s-rc"><div class="s-rl">Экспорт данных</div><div class="s-rs">Скачать настройки и сайты</div></div>
+</button>
+
+<button class="s-row rpl" onclick="document.getElementById('import-file').click()">
+  <span class="ms s-ico">upload</span>
+  <div class="s-rc"><div class="s-rl">Импорт данных</div><div class="s-rs">Загрузить из JSON</div></div>
+</button>
+<input id="import-file" type="file" accept="application/json" style="display:none" onchange="importData(event)" />
     <div class="s-sec" style="margin-top:10px"><div class="s-sec-title">Данные и сброс</div></div>
     <div class="s-div"></div>
     <button class="s-row rpl" onclick="resetSites()">
@@ -737,16 +871,25 @@
 </div>
 
 <!-- CTX -->
-<div class="ctx" id="ctx">
+<div class="ctx" id="ctx" onclick="event.stopPropagation()">
   <button class="ctx-item rpl" onclick="ctxOpen()"><span class="ms">open_in_new</span>Открыть</button>
   <button class="ctx-item rpl" onclick="ctxEdit()"><span class="ms">edit</span>Изменить</button>
-  <button class="ctx-item danger rpl" onclick="ctxDelete()"><span class="ms">delete</span>Удалить</button>
+  <button class="ctx-item danger" onclick="startDeleteConfirm(event)"><span class="ms">delete</span>Удалить</button>
+
+<div class="ctx-confirm" id="ctx-confirm">
+  <div class="ctx-confirm-title">Удалить сайт?</div>
+  <div class="ctx-confirm-actions">
+    <button class="ctx-item danger" onclick="ctxDeleteConfirmed()"><span class="ms">check</span>Да, удалить</button>
+    <button class="ctx-item" onclick="ctxCancelDelete()"><span class="ms">close</span>Нет</button>
+  </div>
+</div>
 </div>
 
 <!-- SNACK -->
 <div class="snack" id="snack">
   <span id="snack-msg" style="flex:1"></span>
   <button class="snack-action" onclick="hideSnack()">OK</button>
+  <button class="snack-action" id="snack-action" style="display:none"></button>
 </div>
 
 <script>
@@ -816,8 +959,199 @@ const DEF_S = {
   sites:true, viewMode:'grid', icons:true, labels:true, iconSize:'m', iconShape:'r', iconBg:'site',
   weather:true, city:'', unit:'C', forecast:true, wstats:true,
 };
+const PROFILES_KEY = 'nd-profiles2';
+const ACTIVE_PROFILE_KEY = 'nd-active-profile2';
 
-let S = Object.assign({}, DEF_S, JSON.parse(localStorage.getItem('nd-s2') || '{}'));
+document.addEventListener('keydown', (e) => {
+  if (e.key !== '/') return;
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+  const t = e.target;
+  const inField = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+  if (inField) return;
+
+  const searchInput = document.getElementById('s-in');
+  if (!searchInput) return;
+
+  e.preventDefault();
+  searchInput.focus();
+  searchInput.select();
+});
+
+function profileKey(profileId, suffix){
+  return `nd-p-${profileId}-${suffix}`;
+}
+
+function renderEngineSub(){
+  const sub = document.getElementById('engine-sub');
+  if(!sub) return;
+  sub.textContent = (ENGINES_MAP[S.engine] || ENGINES_MAP.google).name;
+}
+
+function openEngineModal(){
+  renderEngineModal();
+  document.getElementById('eng-m-ov').classList.add('show');
+}
+
+function runLayoutTransition(updateFn){
+  if (document.startViewTransition) {
+    document.startViewTransition(updateFn);
+  } else {
+    updateFn();
+  }
+}
+
+function renderEngineModal(){
+  const list = document.getElementById('eng-list');
+  if(!list) return;
+
+  list.innerHTML = Object.entries(ENGINES_MAP).map(([key, e]) => `
+    <button class="profile-item rpl ${key===S.engine?'active':''}" onclick="selectEngine('${key}')">
+      <span>${e.name}</span>
+      <span class="ms">${key===S.engine?'check_circle':'radio_button_unchecked'}</span>
+    </button>
+  `).join('');
+}
+
+function selectEngine(key){
+  S.engine = key;
+  saveS();
+  renderEngines();
+  renderEngineSub();
+  renderEngineModal();
+}
+
+function openProfileModal(){
+  renderProfileModal();
+  document.getElementById('profile-m-ov').classList.add('show');
+}
+
+function renderProfileModal(){
+  const list = document.getElementById('profile-list');
+  if(!list) return;
+
+  list.innerHTML = profiles.map(p => `
+    <button class="profile-item rpl ${p.id===activeProfileId?'active':''}" onclick="switchProfile('${p.id}')">
+      <span>${p.name}</span>
+      <span class="ms">${p.id===activeProfileId?'check_circle':'radio_button_unchecked'}</span>
+    </button>
+  `).join('');
+}
+
+function renderProfilesUI(){
+  const sub = document.getElementById('profile-sub');
+  if(!sub) return;
+
+  if(!Array.isArray(profiles) || profiles.length === 0){
+    profiles = [{ id:'default', name:'Основной' }];
+    localStorage.setItem('nd-profiles2', JSON.stringify(profiles));
+  }
+
+  if(!profiles.some(p => p.id === activeProfileId)){
+    activeProfileId = profiles[0].id;
+    localStorage.setItem('nd-active-profile2', activeProfileId);
+  }
+
+  const active = profiles.find(p => p.id === activeProfileId);
+  sub.textContent = active ? active.name : 'Основной';
+}
+
+function switchProfile(id){
+  if(!id || id === activeProfileId) return;
+  setActiveProfileId(id);
+  location.reload();
+}
+
+function addProfile(){
+  const name = prompt('Название нового профиля:');
+  if(!name || !name.trim()) return;
+
+  const cleanName = name.trim();
+  const id = 'p' + Date.now().toString(36);
+
+  profiles.push({ id, name: cleanName });
+  saveProfiles();
+
+  localStorage.setItem(profileKey(id,'s2'), JSON.stringify(S));
+  localStorage.setItem(profileKey(id,'sites2'), JSON.stringify(sites));
+  if(typeof customEmojis !== 'undefined'){
+    localStorage.setItem(profileKey(id,'custom-emojis2'), JSON.stringify(customEmojis));
+  }
+
+  setActiveProfileId(id);
+  location.reload();
+}
+
+function deleteProfile(){
+  if(profiles.length <= 1){
+    toast('Нельзя удалить последний профиль');
+    return;
+  }
+
+  const active = profiles.find(p => p.id === activeProfileId);
+  if(!active) return;
+
+  if(!confirm(`Удалить профиль "${active.name}"?`)) return;
+
+  profiles = profiles.filter(p => p.id !== activeProfileId);
+  saveProfiles();
+
+  localStorage.removeItem(profileKey(activeProfileId,'s2'));
+  localStorage.removeItem(profileKey(activeProfileId,'sites2'));
+  localStorage.removeItem(profileKey(activeProfileId,'custom-emojis2'));
+
+  const fallback = profiles[0].id;
+  setActiveProfileId(fallback);
+  location.reload();
+}
+
+function loadProfiles(){
+  const raw = JSON.parse(localStorage.getItem(PROFILES_KEY) || 'null');
+  if(Array.isArray(raw) && raw.length) return raw;
+  const def = [{ id:'default', name:'Основной' }];
+  localStorage.setItem(PROFILES_KEY, JSON.stringify(def));
+  return def;
+}
+
+function saveProfiles(){
+  localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+}
+
+function loadActiveProfileId(){
+  return localStorage.getItem(ACTIVE_PROFILE_KEY) || 'default';
+}
+
+function setActiveProfileId(id){
+  localStorage.setItem(ACTIVE_PROFILE_KEY, id);
+}
+
+function migrateLegacyData(){
+  const oldS = localStorage.getItem('nd-s2');
+  const oldSites = localStorage.getItem('nd-sites2');
+  const oldEm = localStorage.getItem('nd-custom-emojis2');
+
+  if(oldS && !localStorage.getItem(profileKey('default','s2'))){
+    localStorage.setItem(profileKey('default','s2'), oldS);
+  }
+  if(oldSites && !localStorage.getItem(profileKey('default','sites2'))){
+    localStorage.setItem(profileKey('default','sites2'), oldSites);
+  }
+  if(oldEm && !localStorage.getItem(profileKey('default','custom-emojis2'))){
+    localStorage.setItem(profileKey('default','custom-emojis2'), oldEm);
+  }
+}
+
+let profiles = loadProfiles();
+let activeProfileId = loadActiveProfileId();
+
+if(!profiles.some(p => p.id === activeProfileId)){
+  activeProfileId = profiles[0].id;
+  setActiveProfileId(activeProfileId);
+}
+
+migrateLegacyData();
+
+let S = JSON.parse(localStorage.getItem(profileKey(activeProfileId,'s2')) || 'null') || Object.assign({}, DEF_S);
 
 const DEF_SITES = [
   {id:1,name:'YouTube',  url:'https://youtube.com',       emoji:'▶️',abbr:'YT'},
@@ -831,11 +1165,84 @@ const DEF_SITES = [
 ];
 const BASE_EMOJIS=['🌐','⭐','🔥','💡','📌','🎯','🚀','💎','📊','🛒','🎮','📰','🏠','💼','🔬','🎓','🎬','🎧','🏆','🌙','⚡','🌍','🔗','💻','🧩','📱','🗂️','🎲','🖥️','📷'];
 
-let customEmojis = JSON.parse(localStorage.getItem('nd-custom-emojis2') || '[]');
+let customEmojis = JSON.parse(localStorage.getItem(profileKey(activeProfileId,'custom-emojis2')) || '[]');
 let EMOJIS = [...new Set([...BASE_EMOJIS, ...customEmojis])];
 
 function saveCustomEmojis(){
-  localStorage.setItem('nd-custom-emojis2', JSON.stringify(customEmojis));
+  localStorage.setItem(profileKey(activeProfileId,'custom-emojis2'), JSON.stringify(customEmojis));
+}
+
+function exportData(){
+  const payload = {
+    version: 2,
+    profiles: profiles,
+    activeProfileId: activeProfileId,
+    data: {}
+  };
+
+  profiles.forEach(p => {
+    payload.data[p.id] = {
+      settings: JSON.parse(localStorage.getItem(profileKey(p.id,'s2')) || 'null') || DEF_S,
+      sites: JSON.parse(localStorage.getItem(profileKey(p.id,'sites2')) || 'null') || DEF_SITES,
+      customEmojis: JSON.parse(localStorage.getItem(profileKey(p.id,'custom-emojis2')) || '[]')
+    };
+  });
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `newtab-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Экспорт готов');
+}
+
+function importData(e){
+  const file = e.target.files?.[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const json = JSON.parse(reader.result);
+
+      // Новый формат (с профилями)
+      if (json.version === 2 && Array.isArray(json.profiles) && json.data) {
+        localStorage.setItem(PROFILES_KEY, JSON.stringify(json.profiles));
+        const active = json.activeProfileId || json.profiles[0]?.id || 'default';
+        localStorage.setItem(ACTIVE_PROFILE_KEY, active);
+
+        json.profiles.forEach(p => {
+          const d = json.data[p.id] || {};
+          localStorage.setItem(profileKey(p.id,'s2'), JSON.stringify(d.settings || DEF_S));
+          localStorage.setItem(profileKey(p.id,'sites2'), JSON.stringify(d.sites || DEF_SITES));
+          localStorage.setItem(profileKey(p.id,'custom-emojis2'), JSON.stringify(d.customEmojis || []));
+        });
+
+        toast('Импорт выполнен');
+        setTimeout(() => location.reload(), 300);
+        return;
+      }
+
+      // Старый формат (один профиль)
+      if (json.settings && Array.isArray(json.sites)) {
+        localStorage.setItem(profileKey(activeProfileId,'s2'), JSON.stringify(json.settings));
+        localStorage.setItem(profileKey(activeProfileId,'sites2'), JSON.stringify(json.sites));
+        localStorage.setItem(profileKey(activeProfileId,'custom-emojis2'), JSON.stringify(json.customEmojis || []));
+        toast('Импорт выполнен');
+        setTimeout(() => location.reload(), 300);
+        return;
+      }
+
+      throw new Error('Неверный формат файла');
+    } catch(err){
+      toast('Ошибка импорта: ' + err.message);
+    } finally {
+      e.target.value = '';
+    }
+  };
+  reader.readAsText(file, 'utf-8');
 }
 
 function removeCustomEmoji(em){
@@ -851,7 +1258,7 @@ function removeCustomEmoji(em){
   toast('Значок удален');
 }
 
-let sites = JSON.parse(localStorage.getItem('nd-sites2') || 'null') || JSON.parse(JSON.stringify(DEF_SITES));
+let sites = JSON.parse(localStorage.getItem(profileKey(activeProfileId,'sites2')) || 'null') || JSON.parse(JSON.stringify(DEF_SITES));
 let nextId = Math.max(...sites.map(s=>s.id), 0)+1;
 let selEmoji = '🌐';
 let ctxId = null;
@@ -859,10 +1266,13 @@ let editSite = null;
 let snackT;
 let clockIv;
 let wData = null;
+let dragSiteId = null;
+let isDraggingSite = false;
+let lastDeleted = null;
 
 /* ════ SAVE ════ */
-const saveS = () => localStorage.setItem('nd-s2', JSON.stringify(S));
-const saveSites = () => localStorage.setItem('nd-sites2', JSON.stringify(sites));
+const saveS = () => localStorage.setItem(profileKey(activeProfileId,'s2'), JSON.stringify(S));
+const saveSites = () => localStorage.setItem(profileKey(activeProfileId,'sites2'), JSON.stringify(sites));
 
 /* ════ RIPPLE ════ */
 document.addEventListener('click', e => {
@@ -983,7 +1393,7 @@ function renderEngines() {
     b.onclick = () => { S.engine=k; saveS(); renderEngines(); document.getElementById('eng-sel').value=k; };
     row.appendChild(b);
   });
-  document.getElementById('eng-sel').value = S.engine;
+  renderEngineSub();
 }
 
 /* ════ QUICK GRID ════ */
@@ -1013,6 +1423,22 @@ function abbr(name) {
   return name.split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2);
 }
 
+function moveSiteBefore(dragId, targetId){
+  if(dragId === targetId) return;
+
+  const from = sites.findIndex(s => s.id === dragId);
+  const to = sites.findIndex(s => s.id === targetId);
+  if(from < 0 || to < 0) return;
+
+  const [moved] = sites.splice(from, 1);
+  sites.splice(to, 0, moved);
+
+  runLayoutTransition(() => {
+    saveSites();
+    renderGrid();
+  });
+}
+
 function renderGrid() {
   const grid = document.getElementById('quick-grid');
   const isList = S.viewMode === 'list';
@@ -1029,6 +1455,8 @@ function renderGrid() {
     const btn = document.createElement('button');
     btn.className = 'quick-item rpl' + (isList?' list-item':'');
     btn.dataset.id = site.id;
+    btn.style.viewTransitionName = `site-${site.id}`;
+    btn.draggable = true;
 
     const bg = getFaviconBg(site);
     const tc = getTextColor();
@@ -1042,8 +1470,39 @@ function renderGrid() {
       <div class="q-favicon" style="width:${sz};height:${sz};border-radius:${sh};background:${bg};box-shadow:var(--el1)">${inner}</div>
       ${nameHtml}
     `;
-    btn.addEventListener('click', () => window.open(site.url, S.newtab?'_blank':'_self'));
+    btn.addEventListener('click', () => {
+  if(isDraggingSite) return;
+  window.open(site.url, S.newtab ? '_blank' : '_self');
+});
     btn.addEventListener('contextmenu', e => { e.preventDefault(); showCtx(e,site.id); });
+    btn.addEventListener('dragstart', (e) => {
+  dragSiteId = site.id;
+  isDraggingSite = true;
+  btn.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+});
+
+btn.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  if(dragSiteId !== site.id) btn.classList.add('drag-over');
+});
+
+btn.addEventListener('dragleave', () => {
+  btn.classList.remove('drag-over');
+});
+
+btn.addEventListener('drop', (e) => {
+  e.preventDefault();
+  btn.classList.remove('drag-over');
+  if(dragSiteId != null) moveSiteBefore(dragSiteId, site.id);
+});
+
+btn.addEventListener('dragend', () => {
+  dragSiteId = null;
+  isDraggingSite = false;
+  btn.classList.remove('dragging');
+  document.querySelectorAll('.quick-item.drag-over').forEach(el => el.classList.remove('drag-over'));
+});
     grid.appendChild(btn);
   });
 
@@ -1151,7 +1610,7 @@ function syncAll() {
   syncSegs();
   // city
   document.getElementById('city-sub').textContent = S.city || 'Не задан';
-  document.getElementById('eng-sel').value = S.engine;
+  renderEngineSub();
 }
 function syncSegs() {
   const set = (ids, active) => ids.forEach(id => { const el=document.getElementById(id); if(el) el.classList.toggle('on', el.id===active) });
@@ -1181,7 +1640,7 @@ function tog(k) {
   if(k==='forecast'||k==='wstats') renderWeather();
 }
 
-function setEng(v){ S.engine=v; saveS(); renderEngines(); }
+function setEng(v){ S.engine=v; saveS(); renderEngines();renderEngineSub(); }
 function setVm(v){ S.viewMode=v; saveS(); syncSegs(); renderGrid(); }
 function setSz(v){ S.iconSize=v; saveS(); syncSegs(); renderGrid(); }
 function setSh(v){ S.iconShape=v; saveS(); syncSegs(); renderGrid(); }
@@ -1272,16 +1731,56 @@ function selEm(em,btn){
 function showCtx(e,id){
   ctxId=id;
   const m=document.getElementById('ctx');
-  m.classList.add('show');
   let x=e.clientX,y=e.clientY;
   if(x+180>innerWidth)x-=180;
   if(y+130>innerHeight)y-=130;
-  m.style.left=x+'px';m.style.top=y+'px';
+  m.style.left=x+'px';
+  m.style.top=y+'px';
+  m.style.transformOrigin = `${e.clientX - x}px ${e.clientY - y}px`;
+  m.classList.remove('confirm');
+  requestAnimationFrame(() => m.classList.add('show'));
 }
-document.addEventListener('click',()=>document.getElementById('ctx').classList.remove('show'));
+document.addEventListener('click',()=>{
+  const m = document.getElementById('ctx');
+  m.classList.remove('confirm');
+  m.classList.remove('show');
+});
 function ctxOpen(){ const s=sites.find(s=>s.id===ctxId); if(s)window.open(s.url,S.newtab?'_blank':'_self') }
 function ctxEdit(){ const s=sites.find(s=>s.id===ctxId); if(s)openSiteM(s) }
-function ctxDelete(){ sites=sites.filter(s=>s.id!==ctxId); saveSites(); renderGrid(); toast('Удалено') }
+function startDeleteConfirm(e){
+  if(e) e.stopPropagation();
+  document.getElementById('ctx').classList.add('confirm');
+}
+
+function ctxCancelDelete(){
+  document.getElementById('ctx').classList.remove('confirm');
+}
+
+function ctxDeleteConfirmed(){
+  const idx = sites.findIndex(s => s.id === ctxId);
+  if(idx < 0) return;
+
+  const removed = sites[idx];
+  lastDeleted = { site: removed, index: idx };
+
+  sites.splice(idx, 1);
+  saveSites();
+  renderGrid();
+
+  toast('Удалено', 'Отменить', () => {
+    if(!lastDeleted) return;
+    const insertAt = Math.min(lastDeleted.index, sites.length);
+    sites.splice(insertAt, 0, lastDeleted.site);
+    saveSites();
+    renderGrid();
+    lastDeleted = null;
+    toast('Восстановлено');
+  });
+
+  const m = document.getElementById('ctx');
+  m.classList.remove('confirm');
+  m.classList.remove('show');
+}
 
 /* ════ SEARCH ════ */
 function onSearchInput(v){
@@ -1298,15 +1797,71 @@ function tfv(w,i){ document.getElementById(w).classList.toggle('v',document.getE
 function closeM(id,e){ if(!e||e.target===document.getElementById(id)) document.getElementById(id).classList.remove('show') }
 
 /* ════ SNACK ════ */
-function toast(msg){ const s=document.getElementById('snack'); document.getElementById('snack-msg').textContent=msg; s.classList.add('show'); clearTimeout(snackT); snackT=setTimeout(hideSnack,2800) }
-function hideSnack(){ document.getElementById('snack').classList.remove('show') }
+let snackActionCb = null;
+
+function toast(msg, actionText = '', actionCb = null){
+  const s = document.getElementById('snack');
+  const msgEl = document.getElementById('snack-msg');
+  const actionEl = document.getElementById('snack-action');
+
+  msgEl.textContent = msg;
+  snackActionCb = actionCb || null;
+
+  if(actionEl){
+    if(actionText && actionCb){
+      actionEl.textContent = actionText;
+      actionEl.style.display = '';
+      actionEl.onclick = (ev) => {
+        ev.stopPropagation();
+        const cb = snackActionCb;
+        hideSnack();
+        if(cb) cb();
+      };
+    } else {
+      actionEl.style.display = 'none';
+      actionEl.onclick = null;
+    }
+  }
+
+  s.classList.add('show');
+  clearTimeout(snackT);
+  snackT = setTimeout(hideSnack, 3500);
+}
+
+function hideSnack(){
+  const s = document.getElementById('snack');
+  const actionEl = document.getElementById('snack-action');
+  s.classList.remove('show');
+  snackActionCb = null;
+  if(actionEl){
+    actionEl.style.display = 'none';
+    actionEl.onclick = null;
+  }
+}
 
 /* ════ RESET ════ */
 function resetSites(){ if(!confirm('Сбросить сайты к стандартным?'))return; sites=JSON.parse(JSON.stringify(DEF_SITES)); nextId=sites.length+1; saveSites(); renderGrid(); toast('Сайты сброшены') }
 function resetSettings(){ if(!confirm('Сбросить все настройки?'))return; S=Object.assign({},DEF_S); saveS(); location.reload() }
 
 /* ════ INIT ════ */
+function ensureProfilesState(){
+  let p = JSON.parse(localStorage.getItem('nd-profiles2') || 'null');
+  if(!Array.isArray(p) || p.length === 0){
+    p = [{ id:'default', name:'Основной' }];
+    localStorage.setItem('nd-profiles2', JSON.stringify(p));
+  }
+
+  let a = localStorage.getItem('nd-active-profile2') || 'default';
+  if(!p.some(x => x.id === a)){
+    a = p[0].id;
+    localStorage.setItem('nd-active-profile2', a);
+  }
+
+  profiles = p;
+  activeProfileId = a;
+}
 function init() {
+  ensureProfilesState();
   applyTheme();
   applyBlobs();
 
@@ -1333,7 +1888,33 @@ function init() {
   buildAccentRow();
 }
 
+renderProfilesUI();
+ensureProfilesState();
 init();
 </script>
+<div class="modal-ov" id="profile-m-ov" onclick="closeM('profile-m-ov',event)">
+  <div class="modal profile-modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Выбор профиля</div>
+
+    <div id="profile-list" class="profile-list"></div>
+
+    <div class="m-actions">
+      <button class="btn btn-text rpl" onclick="addProfile(); setTimeout(renderProfileModal,50)">Добавить</button>
+      <button class="btn btn-tonal rpl" onclick="deleteProfile()">Удалить текущий</button>
+      <button class="btn btn-filled rpl" onclick="document.getElementById('profile-m-ov').classList.remove('show')">Готово</button>
+    </div>
+  </div>
+</div>
+<div class="modal-ov" id="eng-m-ov" onclick="closeM('eng-m-ov',event)">
+  <div class="modal profile-modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Поисковая система</div>
+    <div id="eng-list" class="profile-list"></div>
+    <div class="m-actions">
+      <button class="btn btn-filled rpl" onclick="document.getElementById('eng-m-ov').classList.remove('show')">Готово</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
